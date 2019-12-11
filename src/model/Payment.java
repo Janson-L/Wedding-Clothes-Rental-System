@@ -1,4 +1,4 @@
-import java.utill.*;
+package model;
 
 public class Payment
 {

@@ -1,15 +1,17 @@
+package model;
+
 public class User 
 {
-	private int userID;
+	//private int userID;
 	private String phoneNo;
 	private String ic;
 	private String name;
 	private String email;
-	private int class;
+	private String userType;
 
 	public User(int userID)
 	{
-		super(userID);
+		
 	}
 
 	public String getPhoneNo()
@@ -24,7 +26,7 @@ public class User
 
 	public void setIC(String ic)
 	{
-		thic.ic=ic;
+		this.ic=ic;
 	}
 
 	public void setPhoneNo(String phoneNo)
@@ -52,12 +54,13 @@ public class User
 		this.email=email;
 	}
 
-	public int getClass()
+	public String getUserType()
 	{
-		return class;
+		return userType;
 	}
 
-	public void setClass(int class)
+	public void setUserType(String userType)
 	{
-		this.class=class;
+		this.userType = userType;
 	}
+}

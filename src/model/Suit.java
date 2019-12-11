@@ -2,7 +2,7 @@ package model;
 
 public class Suit extends WedCloth
 {
-	private int latest_ID;
+	//private static int latest_ID;
 	private String color;
 	private double rentalFee;
 	private String size;
@@ -10,9 +10,14 @@ public class Suit extends WedCloth
 
 	public Suit()
 	{
-		super(++latest_ID);
+		
 	}
 
+	public String color()
+	{
+		return color;
+	}
+	
 	public void setColor(String color)
 	{
 		this.color = color;
@@ -47,3 +52,4 @@ public class Suit extends WedCloth
 	{
 		this.size=size;
 	}
+}

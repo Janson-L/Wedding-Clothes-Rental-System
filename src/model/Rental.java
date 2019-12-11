@@ -1,3 +1,4 @@
+package model;
 import java.time.LocalDate;
 
 public class Rental
@@ -9,9 +10,25 @@ public class Rental
 	private int duration;
 	private double total;
 
-	public Rental(int rentalID)
+	public Rental()
 	{	
-		super(rentalID);
+
+	}
+
+	public int getRentalID() {
+		return rentalID;
+	}
+
+	public void setRentalID(int rentalID) {
+		this.rentalID = rentalID;
+	}
+
+	public void setWedCloth(WedCloth wedCloth) {
+		this.wedCloth = wedCloth;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
 	}
 
 	public int getDuration()
@@ -28,7 +45,7 @@ public class Rental
 		}
 	}
 	
-	public duble getTotal()
+	public double getTotal()
 	{
 		return total;
 	}
@@ -47,6 +64,7 @@ public class Rental
 	{
 		this.user=user;
 	}
+}
 
 	
 	

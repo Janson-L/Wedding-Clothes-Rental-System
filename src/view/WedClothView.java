@@ -1,3 +1,4 @@
+package view;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -34,23 +35,23 @@ public class WedClothView extends View
 			scanner.nextLine();
 			System.out.println("Please enter the wedding clothes' details");
 			System.out.print("Color : ");
-			car.setColor(scanner.nextLine());
+			wedCloth.setColor(scanner.nextLine());
 			
 			System.out.print("Type : ");
-			car.setType(scanner.nextLine());
+			wedCloth.setType(scanner.nextLine());
 			
 			System.out.print("Rental Fee : RM");
-			car.setRentalFee(scanner.nextDouble());
+			wedCloth.setRentalFee(scanner.nextDouble());
 			
 			System.out.print("Size : ");
-			car.setSize(scanner.nextInt());
+			wedCloth.setSize(scanner.nextInt());
 			
 			try 
 			{
 				if(WedClothManager.addWedCloth(wedCloth)!=0)
-					System.out.println("Successfully added 					a new wedding clothes.");
+					System.out.println("Successfully added a new wedding clothes.");
 				else
-					System.err.println("Unable to add new 					wedding clothes.");
+					System.err.println("Unable to add new wedding clothes.");
 			} 
 			catch (ClassNotFoundException | SQLException e) 
 			{

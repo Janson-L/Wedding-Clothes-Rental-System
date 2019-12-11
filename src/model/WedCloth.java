@@ -2,7 +2,7 @@ package model;
 
 public class WedCloth 
 {
-	private int Cloth_ID;
+	private int cloth_ID;
 	private String color;
 	private String type;
 	

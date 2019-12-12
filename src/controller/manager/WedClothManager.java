@@ -1,4 +1,6 @@
 package controller.manager;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Vector;
 
 import model.WedCloth;
@@ -22,6 +24,8 @@ public class WedClothManager
 	
 	private static boolean addWedCloth(WedCloth wedCloth)
 	{
+		Connection connection=DriverManager.getConnection("jdbc:mysql://localhost/wed_rental_management_system","root","");
+	}
 		return wedClothes.add(wedCloth);
 	}
 

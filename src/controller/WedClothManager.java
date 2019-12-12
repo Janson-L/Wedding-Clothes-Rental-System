@@ -106,14 +106,14 @@ public class WedClothManager
 	}
 
 	@SuppressWarnings("unused")
-	private static void displayWedCloth(WedCoth wedCloth)
+	private static void displayWedCloth(WedCloth wedCloth)
 	{
 		System.out.println();
 		System.out.println("Wedding Cloth ID: " + wedCloth.getUniqueID());
 		System.out.println("Color " + wedCloth.getColor());
-		System.out.println("Type: " + wedCoth.getType());
+		System.out.println("Type: " + wedCloth.getType());
 		System.out.println("Rental Fee: RM" + wedCloth.getRentalFee());
-		System.out.println("Size: " + wedCoth.getSize());
+		System.out.println("Size: " + wedCloth.getSize());
 	}
 }
 

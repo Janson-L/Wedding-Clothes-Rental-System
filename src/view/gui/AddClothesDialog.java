@@ -75,12 +75,12 @@ public class AddClothesDialog extends JDialog implements ActionListener
 		if (source==btnSubmit)
 		{
 			Vector<Exception> exceptions =new Vector<>();
-			String clothesNo=null, clothesType=null;
+			String clothesColor=null, clothesType=null;
 			double rent=0;
 			
 			
 			try {
-				clothesNo=Validator.validate("Clothes Number", txtClothesNo.getText(), true, 15);
+				clothesColor=Validator.validate("Clothes Color", txtClothesColor.getText(), true, 15);
 			}
 			catch (RequiredFieldException | MaximumLengthException e) {
 				// TODO Auto-generated catch block

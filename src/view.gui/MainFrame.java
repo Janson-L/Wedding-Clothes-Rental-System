@@ -46,6 +46,16 @@ public class MainFrame extends JFrame implements ActionListener
 			new ManageRentalsDialog(this);
 		}
 		
+		else if (source==btnManageCustomer)
+		{
+			new ManageUserDialog(this);
+		}
+		
+		else if (source==btnManageWedCloth)
+		{
+			new ManageWedCloth(this);
+		}
+		
 		
 	}
 	

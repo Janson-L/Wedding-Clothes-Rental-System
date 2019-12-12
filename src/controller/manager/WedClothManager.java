@@ -2,28 +2,17 @@ package controller.manager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.util.Vector;
 
 import model.WedCloth;
 
 public class WedClothManager
 {
-	private static Vector<WedCloth> wedCloth = new Vector<>();
+	private static Vector<WedCloth> wedClothes = new Vector<>();
 	
-	public static int addDress(WedCloth Dress)
-	{
-		WedCloth.add(wedCloth);
-		
-		if (Wedcloth Dress == 0)
-		{
-			
-		}else
-		{
-			return 0;
-		}
-	}
-	
-	public static boolean addWedCloth(WedCloth wedCloth)
+	public static int addWedCloth(WedCloth wedCloth) throws SQLException, ClassNotFoundException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
 		
@@ -44,9 +33,31 @@ public class WedClothManager
 		return status;
 	}
 
-	public static Vector<WedCloth> getWedClothes()
+	public static Vector<WedCloth> getWedClothes() throws SQLException, ClassNotFoundException
 	{
-		return new Vector <>(wedClothes);
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		PreparedStatement ps=connection.prepareStatement("SELECT * FROM clothes ");
+		ResultSet rs=ps.executeQuery();
+		Vector<WedCloth> wedClothes = new Vector<>();
+		
+		while(rs.next())
+		{
+			WedCloth wedCloth = new WedCloth();
+			
+			wedCloth.setCloth_ID(rs.getInt(2));//plateNo is 2nd column in database table
+			wedCloth.setRentRate(rs.getDouble(3));
+			wedCloth.setClothesType(rs.getInt(4));
+			wedCloth.setColour(rs.getString(5));
+			wedCloth.setSize(rs.getString(6));
+			
+			wedClothes.add(wedCloth);
+		}
+		
+		connection.close();
+		
+		return wedClothes;
 	}
 
 	public static Vector<WedCloth> getWedClothes(double maxRentalFee)

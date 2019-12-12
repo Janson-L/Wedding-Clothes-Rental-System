@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Vector;
 
+import model.User;
 import model.WedCloth;
 
 public class WedClothManager
@@ -132,6 +133,21 @@ public class WedClothManager
 		System.out.println("Type: " + wedCloth.getType());
 		System.out.println("Rental Fee: RM" + wedCloth.getRentalFee());
 		System.out.println("Size: " + wedCloth.getSize());
+	}
+	
+	private static Vector<User> user = new Vector<>();
+	
+	public static int addUser(User user)
+	{
+		User.add(user);
+		
+		if ( User.add(user)== 0)
+		{
+			
+		}else
+		{
+			return 0;
+		}
 	}
 }
 

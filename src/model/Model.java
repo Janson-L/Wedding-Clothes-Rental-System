@@ -8,9 +8,6 @@ import java.sql.SQLException;
 
 abstract class Model
 {
-	protected int ID;
-
-
 	public int getID(String searchType) throws ClassNotFoundException, SQLException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
@@ -38,7 +35,6 @@ abstract class Model
 			id="PaymentID";
 			tableName="Payment";
 		}
-		
 		else {return -1;}
 		
 		ps.setString(1, id);
@@ -48,15 +44,16 @@ abstract class Model
 		connection.close();
 		int idDB=0;
 		if(!rs.isBeforeFirst()) {
-			return 0;
+			idDB=1;
 		}
 		else {
-		while(rs.next()) {
-			 idDB= rs.getInt("ClothesID");
-		}
 		
-		return idDB;
+			while(rs.next()) {
+			 idDB= rs.getInt("ClothesID");
+			 idDB++;
+			}
 		}
+		return idDB;
 	}
 		
 }

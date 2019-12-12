@@ -10,9 +10,7 @@ import model.User;
 import model.WedCloth;
 
 public class WedClothManager
-{
-	private static Vector<WedCloth> wedClothes = new Vector<>();
-	
+{	
 	public static int addWedCloth(WedCloth wedCloth) throws SQLException, ClassNotFoundException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
@@ -61,59 +59,31 @@ public class WedClothManager
 		return wedClothes;
 	}
 
-	public static Vector<WedCloth> getWedClothes(double maxRentalFee)
+	public static Vector<WedCloth> getWedClothes(int clothesType)
 	{
 		Vector<WedCloth> temp = new Vector<WedCloth>();
 		
 		for(WedCloth wedCloth : wedClothes)
-			if(wedCloth.getRentalFee() <= maxRentalFee)
+			if(wedCloth.getClothesType() == clothesType)
 				temp.add(wedCloth);
 		
 		return temp;
 	}
 	
 	
-	public static Vector<WedCloth> getWedClothes(String color)
+	public static Vector<WedCloth> getWedClothes(String colour)
 	{
 		Vector<WedCloth> temp = new Vector<WedCloth>();
 		
 		for(WedCloth wedCloth : wedClothes)
 		{
-			if(wedCloth.getColor().toLowerCase().contains(color.toLowerCase()))
+			if(wedCloth.getColour().toLowerCase().contains(colour.toLowerCase()))
 			{
-				temp.add(WedCloth);
+				temp.add(wedCloth);
 			}
+		}
 		return temp;
-	} 
-
-
-	public static Vector<WedCloth> getWedCothes(String type)
-	{
-		Vector<WedCloth> temp = new Vector<WedCloth>();
-		
-		for(WedCloth wedCloth : wedClothes)
-		{
-			if(wedCloth.getType().toLowerCase().contains(color.toLowerCase()))
-			{
-				temp.add(WedCloth);
-			}
-		return temp;
-	} 
-
-	public static Vector<WedCloth> getWedClothes(String size)
-	{
-		Vector<WedCloth> temp = new Vector<WedCloth>();
-		
-		for(WedCloth wedCloth : wedClothes)
-		{
-			if(wedCloth.getSize().toLowerCase().contains(color.toLowerCase()))
-			{
-				temp.add(WedCloth);
-			}
-		return temp;
-	}
-
-	
+	} 	
 	
 	public static int updateWedCloth(WedCloth wedCloth)
 	{
@@ -135,15 +105,15 @@ public class WedClothManager
 	}
 
 	
-	public static boolean deleteWedCloth(int clothID)
+	public static boolean deleteWedCloth(int cloth_ID)
 	{
 		WedCloth wedCloth = null;
 		
-		for(WedCloth c : wedClothes)
+		for(WedCloth wc : wedClothes)
 		{
-			if(c.getUniqueID() == clothID)
+			if(wc.getCloth_ID() == cloth_ID)
 			{
-				wedCloth = c;
+				wedCloth = wc;
 				break;
 			}
 		}
@@ -154,10 +124,10 @@ public class WedClothManager
 	private static void displayWedCloth(WedCloth wedCloth)
 	{
 		System.out.println();
-		System.out.println("Wedding Cloth ID: " + wedCloth.getUniqueID());
-		System.out.println("Color " + wedCloth.getColor());
-		System.out.println("Type: " + wedCloth.getType());
-		System.out.println("Rental Fee: RM" + wedCloth.getRentalFee());
+		System.out.println("Wedding Cloth ID: " + wedCloth.getCloth_ID());
+		System.out.println("Rent Rate " + wedCloth.getRentRate());
+		System.out.println("Type: " + wedCloth.getClothesType());
+		System.out.println("Color: RM" + wedCloth.getColour());
 		System.out.println("Size: " + wedCloth.getSize());
 	}
 	

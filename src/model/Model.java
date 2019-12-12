@@ -28,6 +28,17 @@ abstract class Model
 			id="UserID";
 			tableName="User";
 		}
+		else if(searchType=="Rental")
+		{
+			id="RentalID";
+			tableName="Rental";
+		}
+		else if(searchType=="Payment")
+		{
+			id="PaymentID";
+			tableName="Payment";
+		}
+		
 		else {return -1;}
 		
 		ps.setString(1, id);

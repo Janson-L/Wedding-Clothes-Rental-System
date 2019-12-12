@@ -21,20 +21,22 @@ import controller.validator.MinimumNumberException;
 import controller.validator.RequiredFieldException;
 import controller.validator.Validator;
 
-public class AddRentalDialog extends JDialog implements ActionListener
+public class AddUserDialog extends JDialog implements ActionListener
 {
 	private static final long serialVersionUID = 1L;
 	
-	private JTextField txtRentDate= new JTextField();
-	private JTextField txtRentDuration = new JTextField();
-	private JTextField txtTotalRent = new JTextField();
+	private JTextField txtName= new JTextField();
+	private JTextField txtPhoneNo = new JTextField();
+	private JTextField txtIC = new JTextField();
+	private JTextField txtEmail = new JTextField();
+	private JTextField txtClass = new JTextField();
 	private JButton btnSubmit=new JButton("Submit");
 	private JButton btnReset=new JButton("Reset");
 	
 	
-	public AddRentalDialog (ManageRentalsDialog dialog)
+	public AddUserDialog (ManageUserDialog dialog)
 	{
-		super(dialog, "Add Rental",true);
+		super(dialog, "Add User",true);
 		
 		JPanel pnlCenter=new JPanel(new GridLayout(3,2,10,10));
 		JPanel pnlSouth=new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -42,12 +44,16 @@ public class AddRentalDialog extends JDialog implements ActionListener
 		pnlCenter.setBorder(BorderFactory.createEmptyBorder(10,10,5,10));
 		pnlSouth.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
-		pnlCenter.add(new JLabel("Date of Rent:", JLabel.RIGHT));
-		pnlCenter.add(txtRentDate);
-		pnlCenter.add(new JLabel("Rent duration:", JLabel.RIGHT));
-		pnlCenter.add(txtRentDuration);
-		pnlCenter.add(new JLabel("Rent(RM):", JLabel.RIGHT));
-		pnlCenter.add(txtTotalRent);
+		pnlCenter.add(new JLabel("Name:", JLabel.RIGHT));
+		pnlCenter.add(txtName);
+		pnlCenter.add(new JLabel("Phone Number :", JLabel.RIGHT));
+		pnlCenter.add(txtPhoneNo);
+		pnlCenter.add(new JLabel("IC Number:", JLabel.RIGHT));
+		pnlCenter.add(txtIC);
+		pnlCenter.add(new JLabel("Email:", JLabel.RIGHT));
+		pnlCenter.add(txtEmail);
+		pnlCenter.add(new JLabel("Class:", JLabel.RIGHT));
+		pnlCenter.add(txtClass);
 		
 		pnlSouth.add(btnSubmit);
 		pnlSouth.add(btnReset);
@@ -72,9 +78,11 @@ public class AddRentalDialog extends JDialog implements ActionListener
 	public void actionPerformed(ActionEvent event) 
 	{
 		Object source = event.getSource();
-		if (source==btnSubmit)
+		if(source==btnSubmit)
 		{
-			reset();
+		reset();
+			
+			
 		}
 		
 		else if(source==btnReset)
@@ -85,9 +93,11 @@ public class AddRentalDialog extends JDialog implements ActionListener
 	
 	private void reset()
 	{
-		txtRentDate.setText("");
-		txtRentDuration.setText("");
-		txtTotalRent.setText("");
+		txtName.setText("");
+		txtPhoneNo.setText("");
+		txtIC.setText("");
+		txtEmail.setText("");
+		txtClass.setText("");
 	}
 	
 }

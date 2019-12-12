@@ -2,16 +2,20 @@ package model;
 
 public class User 
 {
-	//private int userID;
+	private int userID;
 	private String phoneNo;
 	private String ic;
 	private String name;
 	private String email;
 	private String userType;
 
-	public User(int userID)
+	public User()
 	{
-		
+		Model.getID("user")=;
+	}
+	
+	public int getUserID() {
+		return userID;
 	}
 
 	public String getPhoneNo()
@@ -63,4 +67,6 @@ public class User
 	{
 		this.userType = userType;
 	}
+
+	
 }

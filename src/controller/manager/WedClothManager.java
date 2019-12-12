@@ -1,6 +1,9 @@
 package controller.manager;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.util.Vector;
 
 import model.User;
@@ -8,31 +11,54 @@ import model.WedCloth;
 
 public class WedClothManager
 {
-	private static Vector<WedCloth> wedCloth = new Vector<>();
+	private static Vector<WedCloth> wedClothes = new Vector<>();
 	
-	public static int addDress(WedCloth Dress)
+	public static int addWedCloth(WedCloth wedCloth) throws SQLException, ClassNotFoundException
 	{
-		WedCloth.add(wedCloth);
+		Class.forName("com.mysql.jdbc.Driver");
 		
-		if (Wedcloth Dress == 0)
-		{
-			
-		}else
-		{
-			return 0;
-		}
-	}
-	
-	private static boolean addWedCloth(WedCloth wedCloth)
-	{
-		Connection connection=DriverManager.getConnection("jdbc:mysql://localhost/wed_rental_management_system","root","");
-	}
-		return wedClothes.add(wedCloth);
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		PreparedStatement ps = connection.prepareStatement(
+				"INSERT INTO clothes(ClothesID, RentRate,ClothesType,Colour,Size)VALUES(?,?,?,?,?)");
+		
+		ps.setInt(1, wedCloth.getCloth_ID());
+		ps.setDouble(2, wedCloth.getRentRate());
+		ps.setInt(3, wedCloth.getClothesType());
+		ps.setString(4, wedCloth.getColour());
+		ps.setString(5, wedCloth.getSize());
+		
+		int status = ps.executeUpdate();
+		
+		connection.close();
+		
+		return status;
 	}
 
-	public static Vector<WedCloth> getWedClothes()
+	public static Vector<WedCloth> getWedClothes() throws SQLException, ClassNotFoundException
 	{
-		return new Vector <>(wedClothes);
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		PreparedStatement ps=connection.prepareStatement("SELECT * FROM clothes ");
+		ResultSet rs=ps.executeQuery();
+		Vector<WedCloth> wedClothes = new Vector<>();
+		
+		while(rs.next())
+		{
+			WedCloth wedCloth = new WedCloth();
+			
+			wedCloth.setCloth_ID(rs.getInt(2));//plateNo is 2nd column in database table
+			wedCloth.setRentRate(rs.getDouble(3));
+			wedCloth.setClothesType(rs.getInt(4));
+			wedCloth.setColour(rs.getString(5));
+			wedCloth.setSize(rs.getString(6));
+			
+			wedClothes.add(wedCloth);
+		}
+		
+		connection.close();
+		
+		return wedClothes;
 	}
 
 	public static Vector<WedCloth> getWedClothes(double maxRentalFee)

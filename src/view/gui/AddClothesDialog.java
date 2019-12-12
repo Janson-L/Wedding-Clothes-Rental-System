@@ -25,14 +25,14 @@ public class AddClothesDialog extends JDialog implements ActionListener
 {
 	private static final long serialVersionUID = 1L;
 	
-	private JTextField txtClothesNo = new JTextField();
+	private JTextField txtClothesColor= new JTextField();
 	private JTextField txtClothesType = new JTextField();
 	private JTextField txtRent = new JTextField();
 	private JButton btnSubmit=new JButton("Submit");
 	private JButton btnReset=new JButton("Reset");
 	
 	
-	public AddClothesDialog (ManageRentalsDialog dialog)
+	public AddClothesDialog (ManageWedClothDialog dialog)
 	{
 		super(dialog, "Add Clothes",true);
 		
@@ -42,8 +42,8 @@ public class AddClothesDialog extends JDialog implements ActionListener
 		pnlCenter.setBorder(BorderFactory.createEmptyBorder(10,10,5,10));
 		pnlSouth.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
-		pnlCenter.add(new JLabel("Clothes number:", JLabel.RIGHT));
-		pnlCenter.add(txtClothesNo);
+		pnlCenter.add(new JLabel("Clothes Color:", JLabel.RIGHT));
+		pnlCenter.add(txtClothesColor);
 		pnlCenter.add(new JLabel("ClothesType:", JLabel.RIGHT));
 		pnlCenter.add(txtClothesType);
 		pnlCenter.add(new JLabel("Rent(RM):", JLabel.RIGHT));
@@ -114,7 +114,7 @@ public class AddClothesDialog extends JDialog implements ActionListener
 	
 	private void reset()
 	{
-		txtClothesNo.setText("");
+		txtClothesColor.setText("");
 		txtClothesType.setText("");
 		txtRent.setText("");
 	}

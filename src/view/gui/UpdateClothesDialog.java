@@ -17,7 +17,7 @@ public class UpdateClothesDialog extends JDialog implements ActionListener
 {
 	private static final long serialVersionUID = 1L;
 	
-	private JTextField txtClothesNo = new JTextField();
+	private JTextField txtClothesColor = new JTextField();
 	private JTextField txtClothesType = new JTextField();
 	private JTextField txtRent = new JTextField();
 	private JButton btnSubmit=new JButton("Submit");
@@ -34,8 +34,9 @@ public class UpdateClothesDialog extends JDialog implements ActionListener
 		pnlCenter.setBorder(BorderFactory.createEmptyBorder(10,10,5,10));
 		pnlSouth.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
+		
 		pnlCenter.add(new JLabel("Clothes number:", JLabel.RIGHT));
-		pnlCenter.add(txtClothesNo);
+		pnlCenter.add(txtClothesColor);
 		pnlCenter.add(new JLabel("New Clothes Type:", JLabel.RIGHT));
 		pnlCenter.add(txtClothesType);
 		pnlCenter.add(new JLabel("New Rent(RM):", JLabel.RIGHT));
@@ -77,7 +78,7 @@ public class UpdateClothesDialog extends JDialog implements ActionListener
 	
 	private void reset()
 	{
-		txtClothesNo.setText("");
+		txtClothesColor.setText("");
 		txtClothesType.setText("");
 		txtRent.setText("");
 	}

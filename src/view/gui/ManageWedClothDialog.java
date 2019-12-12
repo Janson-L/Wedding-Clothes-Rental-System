@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-public class ManageRentalsDialog extends JDialog implements ActionListener
+public class ManageWedClothDialog extends JDialog implements ActionListener
 
 {
 	private static final long serialVersionUID=1L;
@@ -20,7 +20,7 @@ public class ManageRentalsDialog extends JDialog implements ActionListener
 	private JButton btnViewClothesByColour=new JButton("View Clothes by Colour");
 	private JButton btnViewSingleClothes=new JButton("View Single Wedding Clothes");
 	
-	public ManageRentalsDialog(MainFrame frame)
+	public ManageWedClothDialog(MainFrame frame)
 	{
 		GridLayout layout = new GridLayout(8,1,10,10);
 		

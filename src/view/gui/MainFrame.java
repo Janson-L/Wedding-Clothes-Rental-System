@@ -42,8 +42,8 @@ public class MainFrame extends JFrame implements ActionListener
 	{
 		Object source=event.getSource();
 		
-		if(source==btnManageRentals) {
-			new ManageRentalsDialog(this);
+		if(source==btnManageWedCloth) {
+			new ManageWedClothDialog(this);
 		}
 		
 		else if (source==btnManageCustomer)
@@ -51,9 +51,9 @@ public class MainFrame extends JFrame implements ActionListener
 			new ManageUserDialog(this);
 		}
 		
-		else if (source==btnManageWedCloth)
+		else if (source==btnManageRentals)
 		{
-			new ManageWedCloth(this);
+			new ManageRentalsDialog(this);
 		}
 		
 		

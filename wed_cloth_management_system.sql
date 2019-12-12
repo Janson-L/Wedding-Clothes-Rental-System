@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `clothes` (
-  `ClothesID` varchar(255) NOT NULL,
+  `ClothesID` int(12) NOT NULL,
   `RentRate` double NOT NULL,
-  `ClothesType` varchar(255) NOT NULL,
+  `ClothesType` int(1) NOT NULL,
   `Colour` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -42,8 +42,8 @@ CREATE TABLE `clothes` (
 --
 
 CREATE TABLE `clothes_rental` (
-  `ClothesID` varchar(255) NOT NULL,
-  `RentalID` varchar(255) NOT NULL
+  `ClothesID` int(12) NOT NULL,
+  `RentalID` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -53,7 +53,7 @@ CREATE TABLE `clothes_rental` (
 --
 
 CREATE TABLE `payment` (
-  `PaymentID` varchar(255) NOT NULL,
+  `PaymentID` int(12) NOT NULL,
   `PaymentDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -64,12 +64,12 @@ CREATE TABLE `payment` (
 --
 
 CREATE TABLE `rental` (
-  `RentalID` varchar(255) NOT NULL,
+  `RentalID` int(12) NOT NULL,
   `Date` date NOT NULL,
   `Duration` int(5) NOT NULL,
   `Total` double NOT NULL,
-  `UserID` varchar(255) NOT NULL,
-  `PaymentID` varchar(255) NOT NULL
+  `UserID` int(12) NOT NULL,
+  `PaymentID` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -79,7 +79,7 @@ CREATE TABLE `rental` (
 --
 
 CREATE TABLE `user` (
-  `UserID` varchar(255) NOT NULL,
+  `UserID` int(12) NOT NULL,
   `Name` varchar(255) NOT NULL,
   `PhoneNo` varchar(255) NOT NULL,
   `ICNo` varchar(255) NOT NULL,

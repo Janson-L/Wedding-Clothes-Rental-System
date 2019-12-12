@@ -1,6 +1,7 @@
 package controller.manager;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.Vector;
 
 import model.WedCloth;
@@ -22,11 +23,25 @@ public class WedClothManager
 		}
 	}
 	
-	private static boolean addWedCloth(WedCloth wedCloth)
+	public static boolean addWedCloth(WedCloth wedCloth)
 	{
-		Connection connection=DriverManager.getConnection("jdbc:mysql://localhost/wed_rental_management_system","root","");
-	}
-		return wedClothes.add(wedCloth);
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		PreparedStatement ps = connection.prepareStatement(
+				"INSERT INTO clothes(ClothesID, RentRate,ClothesType,Colour,Size)VALUES(?,?,?,?,?)");
+		
+		ps.setInt(1, wedCloth.getCloth_ID());
+		ps.setDouble(2, wedCloth.getRentRate());
+		ps.setInt(3, wedCloth.getClothesType());
+		ps.setString(4, wedCloth.getColour());
+		ps.setString(5, wedCloth.getSize());
+		
+		int status = ps.executeUpdate();
+		
+		connection.close();
+		
+		return status;
 	}
 
 	public static Vector<WedCloth> getWedClothes()

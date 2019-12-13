@@ -1,41 +1,19 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class Payment
 {
-	private int paymentID;
-
-	public int getPaymentID()
-	{
-		return paymentID;
-	}
-
-	public void setPaymentID(int paymentID)
-	{
-		this.paymentID = paymentID;
-	}
-
-	
-	public class Date
-	{
-		private int day;
-		private int month;
-		private int year;
+	public int newPayment() throws ClassNotFoundException, SQLException {
 		
-		public int getDay() 
-		{
-        		return this.day;
-    		}
-
-		 public int getMonth() 
-		{
-        		return this.month;
-		}
-
-		public int getYear() 
-		{
-        		return this.year;
-    		}
-
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
+		PreparedStatement ps= connection.prepareStatement("SELECT ? FROM ? DESC LIMIT 1;");
 		
-    }
+		
+		return 0;
+	}
 }

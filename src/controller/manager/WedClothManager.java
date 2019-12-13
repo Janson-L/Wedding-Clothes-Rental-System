@@ -33,7 +33,7 @@ public class WedClothManager
 		return status;
 	}
 
-	public static void getWedClothes() throws SQLException, ClassNotFoundException
+	public static void getWedClothesID() throws SQLException, ClassNotFoundException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
 		
@@ -53,7 +53,7 @@ public class WedClothManager
 		connection.close();
 	}
 
-	public static void getWedClothes() throws SQLException, ClassNotFoundException
+	public static void getWedClothesType() throws SQLException, ClassNotFoundException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
 		
@@ -75,7 +75,7 @@ public class WedClothManager
 	}
 	
 	
-	public static void getWedClothes() throws SQLException, ClassNotFoundException
+	public static void getWedClothesColour() throws SQLException, ClassNotFoundException
 	{
 		
 		Class.forName("com.mysql.jdbc.Driver");

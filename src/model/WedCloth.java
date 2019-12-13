@@ -1,59 +1,38 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class WedCloth 
 {
-	private int cloth_ID;
+	private int clothID;
+	private Double rentRate;
+	private int type;
 	private String colour;
-	private int clothesType;
-	private double rentRate;
 	private String size;
 	
 	public WedCloth() 
-	{
-		//take id from db
-	}
-	
-	public int getCloth_ID() {
-		return cloth_ID;
-	}
-
-	public void setCloth_ID(int cloth_ID) {
-		this.cloth_ID = cloth_ID;
-	}
-
-	public String getColour() {
-		return colour;
-	}
-
-	public void setColour(String colour) {
-		this.colour = colour;
-	}
-
-	public int getClothesType() {
-		return clothesType;
-	}
-
-	public void setClothesType(int clothesType) {
-		this.clothesType = clothesType;
-	}
-	
-	public double getRentRate()
-	{
-		return rentRate;
-	}
-
-	public void setRentRate(double rentRate)
-	{
-		this.rentRate = rentRate;
-	}
-
-	public String getSize()
-	{
-		return size;
-	}
-
-	public void setSize(String size)
-	{
-		this.size=size;
-	}
+	{ 
+		public static int addWedCloth() throws SQLException, ClassNotFoundException
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+			PreparedStatement ps = connection.prepareStatement(
+					"INSERT INTO clothes(ClothesID, RentRate,ClothesType,Colour,Size)VALUES(?,?,?,?,?)");
+			
+			ps.setInt(1, clothID);
+			ps.setDouble(2, rentRate);
+			ps.setInt(3, type);
+			ps.setString(4, colour);
+			ps.setString(5, size);
+			
+			int status = ps.executeUpdate();
+			
+			connection.close();
+			
+		}
+}
 }

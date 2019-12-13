@@ -1,5 +1,10 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class User 
 {
 	private int userID;
@@ -7,66 +12,22 @@ public class User
 	private String ic;
 	private String name;
 	private String email;
-	private String userType;
+	private int userType;
 
-	public User()
+	public User() throws ClassNotFoundException, SQLException
 	{
-		Model.getID("user")=;
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
+		PreparedStatement ps= connection.prepareStatement("INSERT INTO user (UserID, Name, PhoneNo, ICNo, Email, Class) VALUES(?, ?, ?, ?, ?, ?)");
+		
+		ps.setInt(1, userID);
+		ps.setString(2, name);
+		ps.setString(3, phoneNo);
+		ps.setString(4, ic);
+		ps.setString(5, email);
+		ps.setInt(6, userType);
+		
+		connection.close();
 	}
-	
-	public int getUserID() {
-		return userID;
-	}
-
-	public String getPhoneNo()
-	{
-		return phoneNo;
-	}
-
-	public String getIC()
-	{
-		return ic;
-	}
-
-	public void setIC(String ic)
-	{
-		this.ic=ic;
-	}
-
-	public void setPhoneNo(String phoneNo)
-	{
-		this.phoneNo = phoneNo;
-	}
-
-	public String getName()
-	{
-		return name;
-	}
-
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-
-	public String getEmail()
-	{
-		return email;
-	}
-
-	public void setEmail(String email)
-	{
-		this.email = email;
-	}
-
-	public String getUserType()
-	{
-		return userType;
-	}
-
-	public void setUserType(String userType)
-	{
-		this.userType = userType;
-	}
-
-	
 }

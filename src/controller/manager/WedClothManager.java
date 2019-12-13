@@ -1,88 +1,101 @@
 package controller.manager;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.Vector;
 
+import model.User;
 import model.WedCloth;
 
 public class WedClothManager
-{
-	private static Vector<WedCloth> wedCloth = new Vector<>();
-	
-	public static int addDress(WedCloth Dress)
+{	
+	public static int addWedCloth() throws SQLException, ClassNotFoundException
 	{
-		WedCloth.add(wedCloth);
+		Class.forName("com.mysql.jdbc.Driver");
 		
-		if (Wedcloth Dress == 0)
-		{
-			
-		}else
-		{
-			return 0;
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		PreparedStatement ps = connection.prepareStatement(
+				"INSERT INTO clothes(ClothesID, RentRate,ClothesType,Colour,Size)VALUES(?,?,?,?,?)");
+		
+		ps.setInt(1, wedCloth.getCloth_ID());
+		ps.setDouble(2, wedCloth.getRentRate());
+		ps.setInt(3, wedCloth.getClothesType());
+		ps.setString(4, wedCloth.getColour());
+		ps.setString(5, wedCloth.getSize());
+		
+		int status = ps.executeUpdate();
+		
+		connection.close();
+		
+		return status;
+	}
+
+	public static void getWedClothesID() throws SQLException, ClassNotFoundException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		PreparedStatement ps=connection.prepareStatement("SELECT * FROM clothes ");
+		ResultSet rs=ps.executeQuery();
+		ResultSetMetaData rsmd = rs.getMetaData();
+		int columnsNumber = rsmd.getColumnCount();
+		while (rs.next()) {
+		    for (int i = 1; i <= columnsNumber; i++) {
+		        if (i > 1) System.out.print(",  ");
+		        String columnValue = rs.getString(i);
+		        System.out.print(columnValue + " " + rsmd.getColumnName(i));
+		    }
+		    System.out.println("");
 		}
+		connection.close();
+	}
+
+	public static void getWedClothesType() throws SQLException, ClassNotFoundException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		//WHERE havent complete
+		PreparedStatement ps=connection.prepareStatement("SELECT * FROM clothes WHERE");
+		ResultSet rs=ps.executeQuery();
+		ResultSetMetaData rsmd = rs.getMetaData();
+		int columnsNumber = rsmd.getColumnCount();
+		while (rs.next()) {
+		    for (int i = 1; i <= columnsNumber; i++) {
+		        if (i > 1) System.out.print(",  ");
+		        String columnValue = rs.getString(i);
+		        System.out.print(columnValue + " " + rsmd.getColumnName(i));
+		    }
+		    System.out.println("");
+		}
+		connection.close();
 	}
 	
-	private static boolean addWedCloth(WedCloth wedCloth)
-	{
-		return wedClothes.add(wedCloth);
-	}
-
-	public static Vector<WedCloth> getWedClothes()
-	{
-		return new Vector <>(wedClothes);
-	}
-
-	public static Vector<WedCloth> getWedClothes(double maxRentalFee)
-	{
-		Vector<WedCloth> temp = new Vector<WedCloth>();
-		
-		for(WedCloth wedCloth : wedClothes)
-			if(wedCloth.getRentalFee() <= maxRentalFee)
-				temp.add(wedCloth);
-		
-		return temp;
-	}
 	
-	
-	public static Vector<WedCloth> getWedClothes(String color)
+	public static void getWedClothesColour() throws SQLException, ClassNotFoundException
 	{
-		Vector<WedCloth> temp = new Vector<WedCloth>();
 		
-		for(WedCloth wedCloth : wedClothes)
-		{
-			if(wedCloth.getColor().toLowerCase().contains(color.toLowerCase()))
-			{
-				temp.add(WedCloth);
-			}
-		return temp;
-	} 
-
-
-	public static Vector<WedCloth> getWedCothes(String type)
-	{
-		Vector<WedCloth> temp = new Vector<WedCloth>();
+		Class.forName("com.mysql.jdbc.Driver");
 		
-		for(WedCloth wedCloth : wedClothes)
-		{
-			if(wedCloth.getType().toLowerCase().contains(color.toLowerCase()))
-			{
-				temp.add(WedCloth);
-			}
-		return temp;
-	} 
-
-	public static Vector<WedCloth> getWedClothes(String size)
-	{
-		Vector<WedCloth> temp = new Vector<WedCloth>();
-		
-		for(WedCloth wedCloth : wedClothes)
-		{
-			if(wedCloth.getSize().toLowerCase().contains(color.toLowerCase()))
-			{
-				temp.add(WedCloth);
-			}
-		return temp;
-	}
-
-	
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		//WHERE havent complete
+		PreparedStatement ps=connection.prepareStatement("SELECT * FROM clothes ");
+		ResultSet rs=ps.executeQuery();
+		ResultSetMetaData rsmd = rs.getMetaData();
+		int columnsNumber = rsmd.getColumnCount();
+		while (rs.next()) {
+		    for (int i = 1; i <= columnsNumber; i++) {
+		        if (i > 1) System.out.print(",  ");
+		        String columnValue = rs.getString(i);
+		        System.out.print(columnValue + " " + rsmd.getColumnName(i));
+		    }
+		    System.out.println("");
+		}
+		connection.close();
+	} 	
 	
 	public static int updateWedCloth(WedCloth wedCloth)
 	{
@@ -104,30 +117,49 @@ public class WedClothManager
 	}
 
 	
-	public static boolean deleteWedCloth(int clothID)
+	public static void deleteWedCloth() throws SQLException, ClassNotFoundException
 	{
-		WedCloth wedCloth = null;
+		Class.forName("com.mysql.jdbc.Driver");
 		
-		for(WedCloth c : wedClothes)
-		{
-			if(c.getUniqueID() == clothID)
-			{
-				wedCloth = c;
-				break;
-			}
-		}
-		return wedClothes.remove(wedCloth);
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		//WHERE havent complete
+		PreparedStatement ps=connection.prepareStatement("DELETE * FROM clothes WHERE");
+		ResultSet rs=ps.executeQuery();
+		
+		connection.close();
 	}
 
 	@SuppressWarnings("unused")
-	private static void displayWedCloth(WedCloth wedCloth)
+	private static void displayWedCloth()
 	{
 		System.out.println();
-		System.out.println("Wedding Cloth ID: " + wedCloth.getUniqueID());
-		System.out.println("Color " + wedCloth.getColor());
-		System.out.println("Type: " + wedCloth.getType());
-		System.out.println("Rental Fee: RM" + wedCloth.getRentalFee());
+		System.out.println("Wedding Cloth ID: " + wedCloth.getCloth_ID());
+		System.out.println("Rent Rate: RM" + wedCloth.getRentRate());
+		System.out.println("Type: " + wedCloth.getClothesType());
+		System.out.println("Color: " + wedCloth.getColour());
 		System.out.println("Size: " + wedCloth.getSize());
+	}
+		
+	public static int addUser()
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		PreparedStatement ps = connection.prepareStatement(
+				"INSERT INTO User(UserID, Name, PhoneNo, IC, Email, Class)VALUES(?,?,?,?,?,?)");
+		
+		ps.setInt(1, user.getCloth_ID());
+		ps.setDouble(2, user.getRentRate());
+		ps.setInt(3, user.getClothesType());
+		ps.setString(4, user.getColour());
+		ps.setString(5, user.getSize());
+		ps.setString(6, user.getSize());
+		
+		int status = ps.executeUpdate();
+		
+		connection.close();
+		
+		return status;
 	}
 }
 

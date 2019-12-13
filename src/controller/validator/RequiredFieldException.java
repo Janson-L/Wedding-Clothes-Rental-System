@@ -1,5 +1,6 @@
 package controller.validator;
 
+
 public class RequiredFieldException extends Exception{
 	private static final long serialVersionUID = 1L;
 	
@@ -9,4 +10,3 @@ public class RequiredFieldException extends Exception{
 		
 	}
 
-}

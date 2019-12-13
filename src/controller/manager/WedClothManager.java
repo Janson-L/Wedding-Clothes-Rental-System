@@ -12,7 +12,7 @@ import model.WedCloth;
 
 public class WedClothManager
 {	
-	public static int addWedCloth(WedCloth wedCloth) throws SQLException, ClassNotFoundException
+	public static int addWedCloth() throws SQLException, ClassNotFoundException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
 		
@@ -53,7 +53,7 @@ public class WedClothManager
 		connection.close();
 	}
 
-	public static void getWedClothes(int clothesType) throws SQLException, ClassNotFoundException
+	public static void getWedClothes() throws SQLException, ClassNotFoundException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
 		
@@ -75,7 +75,7 @@ public class WedClothManager
 	}
 	
 	
-	public static void getWedClothes(String colour) throws SQLException, ClassNotFoundException
+	public static void getWedClothes() throws SQLException, ClassNotFoundException
 	{
 		
 		Class.forName("com.mysql.jdbc.Driver");
@@ -117,7 +117,7 @@ public class WedClothManager
 	}
 
 	
-	public static void deleteWedCloth(int cloth_ID) throws SQLException, ClassNotFoundException
+	public static void deleteWedCloth() throws SQLException, ClassNotFoundException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
 		
@@ -130,7 +130,7 @@ public class WedClothManager
 	}
 
 	@SuppressWarnings("unused")
-	private static void displayWedCloth(WedCloth wedCloth)
+	private static void displayWedCloth()
 	{
 		System.out.println();
 		System.out.println("Wedding Cloth ID: " + wedCloth.getCloth_ID());
@@ -139,10 +139,8 @@ public class WedClothManager
 		System.out.println("Color: " + wedCloth.getColour());
 		System.out.println("Size: " + wedCloth.getSize());
 	}
-	
-	private static Vector<User> user = new Vector<>();
-	
-	public static int addUser(User user)
+		
+	public static int addUser()
 	{
 		Class.forName("com.mysql.jdbc.Driver");
 		
@@ -150,12 +148,12 @@ public class WedClothManager
 		PreparedStatement ps = connection.prepareStatement(
 				"INSERT INTO User(UserID, Name, PhoneNo, IC, Email, Class)VALUES(?,?,?,?,?,?)");
 		
-		ps.setInt(1, wedCloth.getCloth_ID());
-		ps.setDouble(2, wedCloth.getRentRate());
-		ps.setInt(3, wedCloth.getClothesType());
-		ps.setString(4, wedCloth.getColour());
-		ps.setString(5, wedCloth.getSize());
-		ps.setString(6, wedCloth.getSize());
+		ps.setInt(1, user.getCloth_ID());
+		ps.setDouble(2, user.getRentRate());
+		ps.setInt(3, user.getClothesType());
+		ps.setString(4, user.getColour());
+		ps.setString(5, user.getSize());
+		ps.setString(6, user.getSize());
 		
 		int status = ps.executeUpdate();
 		

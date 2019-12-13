@@ -144,15 +144,24 @@ public class WedClothManager
 	
 	public static int addUser(User user)
 	{
-		User.add(user);
+		Class.forName("com.mysql.jdbc.Driver");
 		
-		if ( User.add(user)== 0)
-		{
-			
-		}else
-		{
-			return 0;
-		}
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		PreparedStatement ps = connection.prepareStatement(
+				"INSERT INTO User(UserID, Name, PhoneNo, IC, Email, Class)VALUES(?,?,?,?,?,?)");
+		
+		ps.setInt(1, wedCloth.getCloth_ID());
+		ps.setDouble(2, wedCloth.getRentRate());
+		ps.setInt(3, wedCloth.getClothesType());
+		ps.setString(4, wedCloth.getColour());
+		ps.setString(5, wedCloth.getSize());
+		ps.setString(6, wedCloth.getSize());
+		
+		int status = ps.executeUpdate();
+		
+		connection.close();
+		
+		return status;
 	}
 }
 

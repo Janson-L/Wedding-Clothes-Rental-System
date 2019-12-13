@@ -45,8 +45,6 @@ public class MainFrame extends JFrame implements ActionListener
 		if(source==btnManageRentals) {
 			new ManageRentalsDialog(this);
 		}
-		
-		
 	}
 	
 	public static void main(String[] args) 

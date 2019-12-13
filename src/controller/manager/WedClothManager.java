@@ -12,27 +12,6 @@ import model.WedCloth;
 
 public class WedClothManager
 {	
-	public static int addWedCloth() throws SQLException, ClassNotFoundException
-	{
-		Class.forName("com.mysql.jdbc.Driver");
-		
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
-		PreparedStatement ps = connection.prepareStatement(
-				"INSERT INTO clothes(ClothesID, RentRate,ClothesType,Colour,Size)VALUES(?,?,?,?,?)");
-		
-		ps.setInt(1, wedCloth.getCloth_ID());
-		ps.setDouble(2, wedCloth.getRentRate());
-		ps.setInt(3, wedCloth.getClothesType());
-		ps.setString(4, wedCloth.getColour());
-		ps.setString(5, wedCloth.getSize());
-		
-		int status = ps.executeUpdate();
-		
-		connection.close();
-		
-		return status;
-	}
-
 	public static void getWedClothesID() throws SQLException, ClassNotFoundException
 	{
 		Class.forName("com.mysql.jdbc.Driver");

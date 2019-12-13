@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -103,6 +104,24 @@ public class AddClothesDialog extends JDialog implements ActionListener
 				exceptions.add(e);
 			}
 			
+			int size=exceptions.size();
+			String message=null;
+			
+			if(size==1) 
+			{
+				message=exceptions.firstElement().getMessage();
+			}
+			else 
+			{
+				message="Please fix the following errors:";
+				for (int i=0;i<size;i++) 
+				{
+					message+="\n" + (i+1) +". " +exceptions.get(i).getMessage();
+				}
+			}
+			
+			JOptionPane.showMessageDialog(this,message,"Validation Error",JOptionPane.WARNING_MESSAGE);
+		
 			
 		}
 		

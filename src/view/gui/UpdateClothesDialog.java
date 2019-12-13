@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -12,6 +13,13 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import controller.validator.InvalidNumberException;
+import controller.validator.MaximumLengthException;
+import controller.validator.MaximumNumberException;
+import controller.validator.MinimumNumberException;
+import controller.validator.RequiredFieldException;
+import controller.validator.Validator;
 
 public class UpdateClothesDialog extends JDialog implements ActionListener
 {
@@ -67,7 +75,35 @@ public class UpdateClothesDialog extends JDialog implements ActionListener
 		Object source = event.getSource();
 		if (source==btnSubmit)
 		{
-			reset();
+			Vector<Exception> exceptions =new Vector<>();
+			String clothesColor=null, clothesType=null;
+			double rent=0;
+			
+			
+			try {
+				clothesColor=Validator.validate("Clothes Color", txtClothesColor.getText(), true, 15);
+			}
+			catch (RequiredFieldException | MaximumLengthException e) {
+				// TODO Auto-generated catch block
+				exceptions.add(e);
+			}
+			
+			try {
+				clothesType=Validator.validate("Clothes Type", txtClothesType.getText(), true,50);
+			} 
+			catch (RequiredFieldException | MaximumLengthException e) {
+				// TODO Auto-generated catch block
+				exceptions.add(e);
+			}
+			
+			try {
+				rent=Validator.validate("Rent", txtRent.getText(), true, true, true, 5, 20);
+			} 
+			catch (RequiredFieldException | MaximumLengthException | InvalidNumberException | MinimumNumberException
+					| MaximumNumberException e) {
+				exceptions.add(e);
+			}
+			
 		}
 		
 		else if(source==btnReset)

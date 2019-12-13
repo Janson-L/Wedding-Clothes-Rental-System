@@ -9,4 +9,5 @@ public class RequiredFieldException extends Exception{
 		super(field + " is required.");
 		
 	}
+}
 

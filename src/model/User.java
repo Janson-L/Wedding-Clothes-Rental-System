@@ -3,6 +3,7 @@ package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class User 
@@ -27,6 +28,8 @@ public class User
 		ps.setString(4, ic);
 		ps.setString(5, email);
 		ps.setInt(6, userType);
+
+		ps.executeQuery();
 		
 		connection.close();
 	}

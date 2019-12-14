@@ -6,9 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-abstract class Model
+public class Model
 {
-	public int getID(String searchType) throws ClassNotFoundException, SQLException
+	public static int getID(String searchType) throws ClassNotFoundException, SQLException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
 		String id,tableName;

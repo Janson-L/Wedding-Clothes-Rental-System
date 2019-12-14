@@ -22,6 +22,7 @@ import controller.validator.MaximumLengthException;
 import controller.validator.RequiredFieldException;
 import controller.validator.Validator;
 import model.User;
+import model.Model;
 
 public class AddUserDialog extends JDialog implements ActionListener 
 {
@@ -73,11 +74,13 @@ public class AddUserDialog extends JDialog implements ActionListener
 @Override
 	public void actionPerformed(ActionEvent event) 
 	{
+		int idDB;
 		Object source = event.getSource();
 	
 		if(source == btnSubmit)
 		{
 			Vector<Exception> exceptions= new Vector<>();
+			int id;
 			String name=null,phoneNo=null, icNo = null, email = null;
 			boolean admin=chkAdmin.isSelected();
 			
@@ -119,13 +122,14 @@ public class AddUserDialog extends JDialog implements ActionListener
 			
 			if(size==0)
 			{
-				User.addUser(name,phoneNo,icNo,email);
+				String x = "User";
+				id = Model.getID(x);
+				User.addUser(id,name,phoneNo,icNo,email,admin);
 				
 				try 
 				{
-					if(User.addUser()!=0)
-						JOptionPane.showMessageDialog(this, "Car with ID: " + car.getUniqueID() + 
-						"has been successfully added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+					if(User.addUser(id, name, phoneNo, icNo, email, admin)!=0)
+						JOptionPane.showMessageDialog(this, "User has been added." , "Success", JOptionPane.INFORMATION_MESSAGE);
 					else
 						JOptionPane.showMessageDialog(this, "Unable to add new car.","Unsuccessful",JOptionPane.WARNING_MESSAGE);
 				} 

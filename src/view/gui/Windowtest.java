@@ -121,15 +121,21 @@ public class Windowtest {
 							{
 								JOptionPane.showMessageDialog(null, "Log in success!");
 								Object source = event.getSource();
-								if(source == btnLogIn)
+								if(source == btnLogIn) {
 									new MainFrame();
+									Username.setText("");
+									Password.setText("");
+								}
 							}
 							else if(WedClothManager.loginUser(username, password)!=0)
 							{
 								JOptionPane.showMessageDialog(null, "Log in success!");
 								Object source = event.getSource();
-								if(source == btnLogIn)
+								if(source == btnLogIn) {
 									new MainFrameUser();
+									Username.setText("");
+									Password.setText("");
+								}
 							}
 							else 
 								JOptionPane.showMessageDialog(null, "Incorrect username and password!");

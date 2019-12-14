@@ -39,7 +39,7 @@ public class WedClothManager
 		
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
 		//WHERE havent complete
-		PreparedStatement ps=connection.prepareStatement("SELECT * FROM clothes WHERE");
+		PreparedStatement ps=connection.prepareStatement("SELECT * FROM clothes WHERE CLothesType = ?");
 		ResultSet rs=ps.executeQuery();
 		ResultSetMetaData rsmd = rs.getMetaData();
 		int columnsNumber = rsmd.getColumnCount();
@@ -62,7 +62,7 @@ public class WedClothManager
 		
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
 		//WHERE havent complete
-		PreparedStatement ps=connection.prepareStatement("SELECT * FROM clothes ");
+		PreparedStatement ps=connection.prepareStatement("SELECT * FROM clothes WHERE Colour = ?");
 		ResultSet rs=ps.executeQuery();
 		ResultSetMetaData rsmd = rs.getMetaData();
 		int columnsNumber = rsmd.getColumnCount();

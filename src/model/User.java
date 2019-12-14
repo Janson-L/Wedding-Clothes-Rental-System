@@ -37,4 +37,13 @@ public class User
 			return status;
 
 	}
+	
+	public static int login(String userName, String password) throws ClassNotFoundException, SQLException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
+		PreparedStatement ps= connection.prepareStatement(
+				"SELECT * FROM user WHERE Name = ? AND Password = ?");
+	}
 }

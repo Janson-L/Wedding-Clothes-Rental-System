@@ -137,7 +137,7 @@ public class AddUserDialog extends JDialog implements ActionListener
 					if(User.addUser(id, name,password, phoneNo, icNo, email, admin)!=0)
 						JOptionPane.showMessageDialog(this, "User has been added." , "Success", JOptionPane.INFORMATION_MESSAGE);
 					else
-						JOptionPane.showMessageDialog(this, "Unable to add new car.","Unsuccessful",JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(this, "Unable to add new user.","Unsuccessful",JOptionPane.WARNING_MESSAGE);
 				}
 				catch (ClassNotFoundException | SQLException e)
 				{

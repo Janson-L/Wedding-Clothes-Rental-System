@@ -14,7 +14,7 @@ public class Model
 		String id,tableName;
 		
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
-		PreparedStatement ps= connection.prepareStatement("SELECT ? FROM ? DESC LIMIT 1;");
+		PreparedStatement ps= connection.prepareStatement("SELECT ? FROM ? ORDER BY ? DESC LIMIT 1;");
 		if(searchType=="Clothes")
 		{
 			id="ClothesID";
@@ -39,6 +39,7 @@ public class Model
 		
 		ps.setString(1, id);
 		ps.setString(2, tableName);
+		ps.setString(3, id);
 
 		ResultSet rs=ps.executeQuery();
 		connection.close();

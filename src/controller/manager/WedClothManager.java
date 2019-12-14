@@ -155,7 +155,7 @@ public class WedClothManager
 		System.out.println("Size: " + wedCloth.getSize());
 	}
 	
-	public Vector<User> userLookup() throws ClassNotFoundException, SQLException
+	public static Vector<User> searchUser() throws ClassNotFoundException, SQLException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
 		PreparedStatement ps;
@@ -169,11 +169,6 @@ public class WedClothManager
 		
 		ResultSet rs=ps.executeQuery();
 		
-		if(!rs.isBeforeFirst()) {
-			
-		}
-		else {
-		
 			while(rs.next()) {
 				User user=new User();
 				user.setUserID(rs.getInt("userID"));
@@ -182,12 +177,15 @@ public class WedClothManager
 				user.setIcNo(rs.getString("icNo"));
 				user.setEmail(rs.getString("email"));
 				user.setUserType(rs.getBoolean("class"));
+				
+				users.add(user);
 			}
 			
 		connection.close();
 		
 		return users;
 	}
-}
+
+	}
 
 	

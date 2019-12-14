@@ -15,30 +15,6 @@ public class User
 	private String icNo;
 	private String email;
 	private boolean userType;
-	
-	public static int addUser(int id, String name, String password, String phoneNo, String ICNo, String email, Boolean type) throws ClassNotFoundException, SQLException
-	{		
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
-			PreparedStatement ps= connection.prepareStatement(
-					"INSERT INTO user (UserID, Name, Password, PhoneNo, ICNo, Email, Class) VALUES(?, ?, ?, ?, ?, ?, ?)");
-			
-			ps.setInt(1, id);
-			ps.setString(2, name);
-			ps.setString(3, password);
-			ps.setString(4, phoneNo);
-			ps.setString(5, ICNo);
-			ps.setString(6, email);
-			ps.setBoolean(7, type);
-
-			int status = ps.executeUpdate();
-			
-			connection.close();
-			
-			return status;
-
-	}
 
 	public int getUserID() {
 		return userID;

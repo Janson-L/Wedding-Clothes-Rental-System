@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.manager.WedClothManager;
 import controller.validator.MaximumLengthException;
 import controller.validator.RequiredFieldException;
 import controller.validator.Validator;
@@ -134,7 +135,7 @@ public class AddUserDialog extends JDialog implements ActionListener
 				try 
 				{
 					id = Model.getID("User");
-					if(User.addUser(id, name,password, phoneNo, icNo, email, admin)!=0)
+					if(WedClothManager.addUser(id, name,password, phoneNo, icNo, email, admin)!=0)
 					{
 						JOptionPane.showMessageDialog(this, "User has been added." , "Success", JOptionPane.INFORMATION_MESSAGE);
 						txtUserName.setText("");

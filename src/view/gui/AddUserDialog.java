@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.manager.WedClothManager;
 import controller.validator.MaximumLengthException;
 import controller.validator.RequiredFieldException;
 import controller.validator.Validator;
@@ -74,7 +73,6 @@ public class AddUserDialog extends JDialog implements ActionListener
 @Override
 	public void actionPerformed(ActionEvent event) 
 	{
-		int idDB;
 		Object source = event.getSource();
 	
 		if(source == btnSubmit)
@@ -122,18 +120,14 @@ public class AddUserDialog extends JDialog implements ActionListener
 			
 			if(size==0)
 			{
-				String x = "User";
-				id = Model.getID(x);
-				User.addUser(id,name,phoneNo,icNo,email,admin);
-				
 				try 
 				{
+					id = Model.getID("User");
 					if(User.addUser(id, name, phoneNo, icNo, email, admin)!=0)
 						JOptionPane.showMessageDialog(this, "User has been added." , "Success", JOptionPane.INFORMATION_MESSAGE);
 					else
 						JOptionPane.showMessageDialog(this, "Unable to add new car.","Unsuccessful",JOptionPane.WARNING_MESSAGE);
-				} 
-				catch (ClassNotFoundException | SQLException e)
+				} catch (ClassNotFoundException | SQLException e) 
 				{
 					JOptionPane.showMessageDialog(this, e.getMessage(), "Database Error", JOptionPane.WARNING_MESSAGE);
 				}

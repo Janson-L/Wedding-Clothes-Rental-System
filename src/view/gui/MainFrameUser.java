@@ -6,26 +6,22 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-
-public class MainFrame extends JFrame implements ActionListener
+public class MainFrameUser extends JFrame implements ActionListener
 {
 	private static final long serialVersionUID =1L;
 	
 	private JButton btnManageRentals= new JButton("Manage Rentals");
-	private JButton btnManageUser=new JButton("Manage Users");
 	private JButton btnManageWedCloth=new JButton("Manage Wedding Clothes");
 	
 	
-	public MainFrame()
+	public MainFrameUser()
 	{
 		btnManageRentals.addActionListener(this);
-		btnManageUser.addActionListener(this);
 		btnManageWedCloth.addActionListener(this);
 		
-		GridLayout layout = new GridLayout(3, 1, 10, 10);
+		GridLayout layout = new GridLayout(2, 1, 10, 10);
 		
 		this.add(btnManageRentals);
-		this.add(btnManageUser);
 		this.add(btnManageWedCloth);
 	
 		this.setSize(800,500);
@@ -46,14 +42,14 @@ public class MainFrame extends JFrame implements ActionListener
 		if(source==btnManageRentals) {
 			new ManageRentalsDialog(this);
 		}
-		else if(source==btnManageUser) {
-			new ManageUserDialog(this);
-		}
+		/*else if(source==btnManageWedCloth) {
+			new ManageWedCloth(this);
+		}*/
 	}
 	
 	public static void main(String[] args) 
 	{
-		new MainFrame();
+		new MainFrameUser();
 	}
 
 	

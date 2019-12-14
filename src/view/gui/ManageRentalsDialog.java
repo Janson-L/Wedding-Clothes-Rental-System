@@ -54,6 +54,40 @@ public class ManageRentalsDialog extends JDialog implements ActionListener
 
 	
 
+	public ManageRentalsDialog(MainFrameUser frame) 
+	{
+		super(frame, "Manage Rentals", true);
+		
+		GridLayout layout = new GridLayout(8,1,10,10);
+		
+		this.add(btnAddClothes);
+		this.add(btnUpdateClothes);
+		this.add(btnDeleteClothes);
+		this.add(btnViewAllClothes);
+		this.add(btnViewClothesByMaxPrice);
+		this.add(btnViewClothesByType);
+		this.add(btnViewClothesByColour);
+		this.add(btnViewSingleClothes);
+		
+		btnAddClothes.addActionListener(this);
+		btnUpdateClothes.addActionListener(this);
+		btnDeleteClothes.addActionListener(this);
+		btnViewAllClothes.addActionListener(this);
+		btnViewClothesByMaxPrice.addActionListener(this);
+		btnViewClothesByType.addActionListener(this);
+		btnViewClothesByColour.addActionListener(this);
+		btnViewSingleClothes.addActionListener(this);
+		
+		this.setLayout(layout);
+		this.pack();
+		this.setSize(800,500);
+		this.setLocationRelativeTo(frame);
+		this.setVisible(true);
+	}
+
+
+
+
 	@Override
 	public void actionPerformed(ActionEvent event) 
 	{

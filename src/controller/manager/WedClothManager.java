@@ -12,6 +12,41 @@ import model.WedCloth;
 
 public class WedClothManager
 {	
+	public static int loginAdmin(String userName, String password) throws ClassNotFoundException, SQLException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
+		PreparedStatement ps= connection.prepareStatement(
+				"SELECT * FROM user WHERE Name = ? AND Password = ? AND Class = 1");
+		
+		ps.setString(1, userName);
+		ps.setString(2, password);
+		
+		ResultSet rs = ps.executeQuery();
+		if(!rs.isBeforeFirst())
+			return 0;
+		else
+			return 1;
+	}
+	
+	public static int loginUser(String userName, String password) throws ClassNotFoundException, SQLException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
+		PreparedStatement ps= connection.prepareStatement(
+				"SELECT * FROM user WHERE Name = ? AND Password = ?");
+		
+		ps.setString(1, userName);
+		ps.setString(2, password);
+		
+		ResultSet rs = ps.executeQuery();
+		if(!rs.isBeforeFirst())
+			return 0;
+		else
+			return 1;
+	}
 	
 	public static void getWedClothesID() throws SQLException, ClassNotFoundException
 	{

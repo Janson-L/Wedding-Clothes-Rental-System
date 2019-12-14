@@ -9,8 +9,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Vector;
+
+import controller.manager.WedClothManager;
+import controller.validator.MaximumLengthException;
+import controller.validator.RequiredFieldException;
+import controller.validator.Validator;
 
 public class Windowtest {
 
@@ -77,26 +85,61 @@ public class Windowtest {
 		
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener()
+		{
+			Vector<Exception> exceptions= new Vector<>();
+			String username, password;
+		
+			public void actionPerformed(ActionEvent event) 
+			{
+				try 
 				{
-			
-					@Override
-					public void actionPerformed(ActionEvent event) 
+					username = Validator.validate("User Name", Username.getText(), true, 15);
+				} 
+				catch (RequiredFieldException | MaximumLengthException e) 
+				{
+					exceptions.add(e);
+				}
+				try 
+				{
+					password = Validator.validate("Password", Password.getText(), true, 15);
+				} 
+				catch (RequiredFieldException | MaximumLengthException e) 
+				{
+					exceptions.add(e);
+				}
+						
+				int size=exceptions.size();	
+				if(size==0)
 					{
-						if (Username.getText().isEmpty() || Password.getText().isEmpty())
+					
+					if (Username.getText().isEmpty() || Password.getText().isEmpty())
+					{
+						JOptionPane.showMessageDialog(null, "Please enter username and password!");
+					} else
+						try {
+							if(WedClothManager.loginAdmin(username, password)!=0)
+							{
+								JOptionPane.showMessageDialog(null, "Log in success!");
+								Object source = event.getSource();
+								if(source == btnLogIn)
+									new MainFrame();
+							}
+							else if(WedClothManager.loginUser(username, password)!=0)
+							{
+								JOptionPane.showMessageDialog(null, "Log in success!");
+								Object source = event.getSource();
+								if(source == btnLogIn)
+									new MainFrameUser();
+							}
+							else 
+								JOptionPane.showMessageDialog(null, "Incorrect username and password!");
+						} catch (HeadlessException | ClassNotFoundException | SQLException e) 
 						{
-							JOptionPane.showMessageDialog(null, "Please enter username and password!");
+							JOptionPane.showMessageDialog(null, e.getMessage(), "Database Error", JOptionPane.WARNING_MESSAGE);
 						}
-						else if(Username.getText().equals("admin")&& Password.getText().equals("123456"))
-						{
-							JOptionPane.showMessageDialog(null, "Log in success!");
-							Object source = event.getSource();
-							if(source == btnLogIn)
-								new MainFrame();
-						}
-						else 
-							JOptionPane.showMessageDialog(null, "Incorrect username and password!");
 					}
-				});
+				}
+			});
 		btnLogIn.setBounds(329, 234, 97, 25);
 		frame.getContentPane().add(btnLogIn);
 	}

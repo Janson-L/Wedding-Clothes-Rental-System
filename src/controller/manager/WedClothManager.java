@@ -147,7 +147,6 @@ public class WedClothManager
 	@SuppressWarnings("unused")
 	private static void displayWedCloth()
 	{
-		System.out.println();
 		System.out.println("Wedding Cloth ID: " + wedCloth.getCloth_ID());
 		System.out.println("Rent Rate: RM" + wedCloth.getRentRate());
 		System.out.println("Type: " + wedCloth.getClothesType());

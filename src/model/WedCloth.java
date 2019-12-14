@@ -13,10 +13,8 @@ public class WedCloth
 	private String colour;
 	private String size;
 	
-	public WedCloth() 
+	public WedCloth() throws ClassNotFoundException, SQLException
 	{ 
-		public static int addWedCloth() throws SQLException, ClassNotFoundException
-		{
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
@@ -34,5 +32,4 @@ public class WedCloth
 			connection.close();
 			
 		}
-}
 }

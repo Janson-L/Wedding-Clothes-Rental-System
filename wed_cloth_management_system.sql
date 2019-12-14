@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2019 at 08:12 AM
+-- Generation Time: Dec 13, 2019 at 04:13 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -32,7 +32,8 @@ CREATE TABLE `clothes` (
   `ClothesID` int(12) NOT NULL,
   `RentRate` double NOT NULL,
   `ClothesType` int(1) NOT NULL,
-  `Colour` varchar(255) NOT NULL
+  `Colour` varchar(255) NOT NULL,
+  `Size` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

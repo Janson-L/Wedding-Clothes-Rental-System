@@ -93,9 +93,6 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`UserID`, `Name`, `Password`, `PhoneNo`, `ICNo`, `Email`, `Class`) VALUES
-(1, '123', '123', '123', '123', '123', 1);
-
 --
 -- Indexes for dumped tables
 --

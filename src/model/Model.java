@@ -42,9 +42,24 @@ public class Model
 		else {
 		
 			while(rs.next()) {
-			 idDB= rs.getInt("ClothesID");
-			 idDB++;
+				if(searchType=="Clothes")
+				{
+					idDB= rs.getInt("ClothesID");
+				}
+				else if(searchType=="User")
+				{
+					idDB= rs.getInt("UserID");
+				}
+				else if(searchType=="Rental")
+				{
+					idDB= rs.getInt("RentalID");
+				}
+				else if(searchType=="Payment")
+				{
+					idDB= rs.getInt("PaymentID");
+				}
 			}
+			 idDB++;
 		}
 		connection.close();
 		

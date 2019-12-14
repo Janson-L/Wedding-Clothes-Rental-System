@@ -154,6 +154,40 @@ public class WedClothManager
 		System.out.println("Color: " + wedCloth.getColour());
 		System.out.println("Size: " + wedCloth.getSize());
 	}
+	
+	public Vector<User> userLookup() throws ClassNotFoundException, SQLException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		PreparedStatement ps;
+		
+		Vector<User> users=new Vector<>();
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
+
+
+		ps= connection.prepareStatement("SELECT userID,password,phoneNo,icNo,email, class FROM User ORDER BY UserID;");
+		
+		ResultSet rs=ps.executeQuery();
+		
+		if(!rs.isBeforeFirst()) {
+			
+		}
+		else {
+		
+			while(rs.next()) {
+				User user=new User();
+				user.setUserID(rs.getInt("userID"));
+				user.setPassword(rs.getString("password"));
+				user.setPhoneNo(rs.getString("phoneNo"));
+				user.setIcNo(rs.getString("icNo"));
+				user.setEmail(rs.getString("email"));
+				user.setUserType(rs.getBoolean("class"));
+			}
+			
+		connection.close();
+		
+		return users;
+	}
 }
 
 	

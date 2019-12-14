@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.manager.WedClothManager;
 import controller.validator.InvalidNumberException;
 import controller.validator.MaximumLengthException;
 import controller.validator.MaximumNumberException;
@@ -104,13 +106,40 @@ public class AddClothesDialog extends JDialog implements ActionListener
 				exceptions.add(e);
 			}
 			
+			
+			
+			
 			int size=exceptions.size();
-			String message=null;
+			if(size==0) 
+			{
+				try 
+				{
+					if(WedClothManager.addWedCloth()!=-1)
+					{
+						reset();
+						JOptionPane.showMessageDialog(this,"Clothes successfully added","Success",JOptionPane.INFORMATION_MESSAGE);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(this, "Unable to add clothes.","Unsuccessful", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+				
+				catch (ClassNotFoundException | SQLException e)
+				{
+					JOptionPane.showMessageDialog(this,e.getMessage(),"Database Error",JOptionPane.WARNING_MESSAGE);
+				}
+			}
+			
+			else 
+			{
+				String message=null;
 			
 			if(size==1) 
 			{
 				message=exceptions.firstElement().getMessage();
 			}
+			
 			else 
 			{
 				message="Please fix the following errors:";
@@ -123,7 +152,7 @@ public class AddClothesDialog extends JDialog implements ActionListener
 			JOptionPane.showMessageDialog(this,message,"Validation Error",JOptionPane.WARNING_MESSAGE);
 		
 			
-		}
+		    }}
 		
 		else if(source==btnReset)
 		{

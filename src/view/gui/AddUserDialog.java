@@ -119,11 +119,11 @@ public class AddUserDialog extends JDialog implements ActionListener
 			
 			if(size==0)
 			{
-				User.userID = 
+				User.name = txtUserName.getText();
 				
 				try 
 				{
-					if(addUser()!=0)
+					if(User.addUser()!=0)
 						JOptionPane.showMessageDialog(this, "Car with ID: " + car.getUniqueID() + 
 						"has been successfully added.", "Success", JOptionPane.INFORMATION_MESSAGE);
 					else
@@ -148,7 +148,6 @@ public class AddUserDialog extends JDialog implements ActionListener
 				}
 				JOptionPane.showMessageDialog(this, message, "Validation Error", JOptionPane.WARNING_MESSAGE);
 			}
-		}
 		}
 	
 		else if(source==btnReset)

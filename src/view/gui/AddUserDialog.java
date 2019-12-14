@@ -78,7 +78,7 @@ public class AddUserDialog extends JDialog implements ActionListener
 		if(source == btnSubmit)
 		{
 			Vector<Exception> exceptions= new Vector<>();
-			int id=0;
+			int id;
 			String name=null,phoneNo=null, icNo = null, email = null;
 			boolean admin=chkAdmin.isSelected();
 			
@@ -116,30 +116,10 @@ public class AddUserDialog extends JDialog implements ActionListener
 				exceptions.add(e);
 			}
 			
-			int size=exceptions.size();	
+			int size=exceptions.size();
+			
 			if(size==0)
 			{
-<<<<<<< HEAD
-=======
-				String x = "User";
-				try {
-					id = Model.getID(x);
-				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				if(id!=0) {
-				try {
-					User.addUser(id,name,phoneNo,icNo,email,admin);
-				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				}
-				
-				
->>>>>>> a8081f9d5cb7fcb2339cb02651ed6c2cf47c62de
 				try 
 				{
 					id = Model.getID("User");
@@ -147,13 +127,7 @@ public class AddUserDialog extends JDialog implements ActionListener
 						JOptionPane.showMessageDialog(this, "User has been added." , "Success", JOptionPane.INFORMATION_MESSAGE);
 					else
 						JOptionPane.showMessageDialog(this, "Unable to add new car.","Unsuccessful",JOptionPane.WARNING_MESSAGE);
-<<<<<<< HEAD
 				} catch (ClassNotFoundException | SQLException e) 
-=======
-				} 
-				
-				catch (ClassNotFoundException | SQLException e)
->>>>>>> a8081f9d5cb7fcb2339cb02651ed6c2cf47c62de
 				{
 					JOptionPane.showMessageDialog(this, e.getMessage(), "Database Error", JOptionPane.WARNING_MESSAGE);
 				}

@@ -27,6 +27,7 @@ public class AddUserDialog extends JDialog implements ActionListener
 {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtUserName = new JTextField();
+	private JTextField txtPassword = new JTextField();
 	private JTextField txtPhoneNo = new JTextField();
 	private JTextField txtICNo = new JTextField();
 	private JTextField txtEmail = new JTextField();
@@ -45,6 +46,8 @@ public class AddUserDialog extends JDialog implements ActionListener
 	
 		pnlCenter.add(new JLabel("User Name: ", JLabel.RIGHT));
 		pnlCenter.add(txtUserName);
+		pnlCenter.add(new JLabel("Password: ", JLabel.RIGHT));
+		pnlCenter.add(txtPassword);
 		pnlCenter.add(new JLabel("Phone Number: ", JLabel.RIGHT));
 		pnlCenter.add(txtPhoneNo);
 		pnlCenter.add(new JLabel("IC Number: ", JLabel.RIGHT));
@@ -79,12 +82,21 @@ public class AddUserDialog extends JDialog implements ActionListener
 		{
 			Vector<Exception> exceptions= new Vector<>();
 			int id=0;
-			String name=null,phoneNo=null, icNo = null, email = null;
+			String name=null,password=null,phoneNo=null, icNo = null, email = null;
 			boolean admin=chkAdmin.isSelected();
 			
 			try 
 			{
 				name = Validator.validate("User Name", txtUserName.getText(), true, 15);
+			} 
+			catch (RequiredFieldException | MaximumLengthException e) 
+			{
+				exceptions.add(e);
+			}
+			
+			try 
+			{
+				password = Validator.validate("Password", txtPassword.getText(), true, 15);
 			} 
 			catch (RequiredFieldException | MaximumLengthException e) 
 			{
@@ -119,43 +131,17 @@ public class AddUserDialog extends JDialog implements ActionListener
 			int size=exceptions.size();	
 			if(size==0)
 			{
-<<<<<<< HEAD
-=======
-				String x = "User";
-				try {
-					id = Model.getID(x);
-				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				if(id!=0) {
-				try {
-					User.addUser(id,name,phoneNo,icNo,email,admin);
-				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				}
-				
-				
->>>>>>> a8081f9d5cb7fcb2339cb02651ed6c2cf47c62de
 				try 
 				{
 					id = Model.getID("User");
-					if(User.addUser(id, name, phoneNo, icNo, email, admin)!=0)
+					if(User.addUser(id, name,password, phoneNo, icNo, email, admin)!=0)
 						JOptionPane.showMessageDialog(this, "User has been added." , "Success", JOptionPane.INFORMATION_MESSAGE);
 					else
 						JOptionPane.showMessageDialog(this, "Unable to add new car.","Unsuccessful",JOptionPane.WARNING_MESSAGE);
-<<<<<<< HEAD
-				} catch (ClassNotFoundException | SQLException e) 
-=======
-				} 
-				
+				}
 				catch (ClassNotFoundException | SQLException e)
->>>>>>> a8081f9d5cb7fcb2339cb02651ed6c2cf47c62de
 				{
-					JOptionPane.showMessageDialog(this, e.getMessage(), "Database Error", JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(this, e.getMessage(), "Database Error", JOptionPane.WARNING_MESSAGE);
 				}
 			}
 			else
@@ -166,17 +152,18 @@ public class AddUserDialog extends JDialog implements ActionListener
 				else
 				{
 					message="PLease fix the following errors: ";
-					
+						
 					for(int i=0;i<size;i++)
 						message+="\n"+(i+1)+"."+exceptions.get(i).getMessage();
 				}
-				JOptionPane.showMessageDialog(this, message, "Validation Error", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(this, message, "Validation Error", JOptionPane.WARNING_MESSAGE);
 			}
-		}
+		}	
 	
 		else if(source==btnReset)
 		{
 			txtUserName.setText("");
+			txtPassword.setText("");
 			txtPhoneNo.setText("");
 			txtICNo.setText("");
 			txtEmail.setText("");

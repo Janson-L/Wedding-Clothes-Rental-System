@@ -14,10 +14,7 @@ public class Model
 		PreparedStatement ps;
 		
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
-<<<<<<< HEAD
-		PreparedStatement ps= connection.prepareStatement("SELECT ? FROM ? ORDER BY ? DESC LIMIT 1;");
-=======
->>>>>>> a8081f9d5cb7fcb2339cb02651ed6c2cf47c62de
+
 		if(searchType=="Clothes")
 		{
 			ps= connection.prepareStatement("SELECT ClothesID FROM Clothes ORDER BY ClothesID DESC LIMIT 1;");
@@ -36,15 +33,7 @@ public class Model
 		}
 		else {return -1;}
 		
-<<<<<<< HEAD
-		ps.setString(1, id);
-		ps.setString(2, tableName);
-		ps.setString(3, id);
-
-=======
->>>>>>> a8081f9d5cb7fcb2339cb02651ed6c2cf47c62de
 		ResultSet rs=ps.executeQuery();
-		connection.close();
 		
 		int idDB=0;
 		if(!rs.isBeforeFirst()) {
@@ -57,6 +46,8 @@ public class Model
 			 idDB++;
 			}
 		}
+		connection.close();
+		
 		return idDB;
 	}
 		

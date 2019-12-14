@@ -119,7 +119,7 @@ public class AddUserDialog extends JDialog implements ActionListener
 			
 			if(size==0)
 			{
-				User.name = txtUserName.getText();
+				User.addUser(name,phoneNo,icNo,email);
 				
 				try 
 				{

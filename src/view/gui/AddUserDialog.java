@@ -135,7 +135,16 @@ public class AddUserDialog extends JDialog implements ActionListener
 				{
 					id = Model.getID("User");
 					if(User.addUser(id, name,password, phoneNo, icNo, email, admin)!=0)
+					{
 						JOptionPane.showMessageDialog(this, "User has been added." , "Success", JOptionPane.INFORMATION_MESSAGE);
+						txtUserName.setText("");
+						txtPassword.setText("");
+						txtPhoneNo.setText("");
+						txtICNo.setText("");
+						txtEmail.setText("");
+						chkAdmin.setSelected(false);
+						txtUserName.grabFocus();
+					}
 					else
 						JOptionPane.showMessageDialog(this, "Unable to add new user.","Unsuccessful",JOptionPane.WARNING_MESSAGE);
 				}

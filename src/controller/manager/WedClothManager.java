@@ -12,6 +12,28 @@ import model.WedCloth;
 
 public class WedClothManager
 {	
+	public static int addUser() throws ClassNotFoundException, SQLException
+	{		
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
+		PreparedStatement ps= connection.prepareStatement(
+				"INSERT INTO user (UserID, Name, PhoneNo, ICNo, Email, Class) VALUES(?, ?, ?, ?, ?, ?)");
+		
+		ps.setInt(1, userID);
+		ps.setString(2, name);
+		ps.setString(3, phoneNo);
+		ps.setString(4, ic);
+		ps.setString(5, email);
+		ps.setInt(6, userType);
+
+		int status = ps.executeUpdate();
+		
+		connection.close();
+		
+		return status;
+	}
+	
 	public static void getWedClothesID() throws SQLException, ClassNotFoundException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
@@ -117,28 +139,6 @@ public class WedClothManager
 		System.out.println("Type: " + wedCloth.getClothesType());
 		System.out.println("Color: " + wedCloth.getColour());
 		System.out.println("Size: " + wedCloth.getSize());
-	}
-		
-	public static int addUser()
-	{
-		Class.forName("com.mysql.jdbc.Driver");
-		
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
-		PreparedStatement ps = connection.prepareStatement(
-				"INSERT INTO User(UserID, Name, PhoneNo, IC, Email, Class)VALUES(?,?,?,?,?,?)");
-		
-		ps.setInt(1, user.getCloth_ID());
-		ps.setDouble(2, user.getRentRate());
-		ps.setInt(3, user.getClothesType());
-		ps.setString(4, user.getColour());
-		ps.setString(5, user.getSize());
-		ps.setString(6, user.getSize());
-		
-		int status = ps.executeUpdate();
-		
-		connection.close();
-		
-		return status;
 	}
 }
 

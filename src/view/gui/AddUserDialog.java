@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -12,12 +13,15 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.manager.WedClothManager;
 import controller.validator.MaximumLengthException;
 import controller.validator.RequiredFieldException;
 import controller.validator.Validator;
+import model.User;
 
 public class AddUserDialog extends JDialog implements ActionListener 
 {
@@ -112,6 +116,39 @@ public class AddUserDialog extends JDialog implements ActionListener
 			}
 			
 			int size=exceptions.size();
+			
+			if(size==0)
+			{
+				User.userID = 
+				
+				try 
+				{
+					if(addUser()!=0)
+						JOptionPane.showMessageDialog(this, "Car with ID: " + car.getUniqueID() + 
+						"has been successfully added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+					else
+						JOptionPane.showMessageDialog(this, "Unable to add new car.","Unsuccessful",JOptionPane.WARNING_MESSAGE);
+				} 
+				catch (ClassNotFoundException | SQLException e)
+				{
+					JOptionPane.showMessageDialog(this, e.getMessage(), "Database Error", JOptionPane.WARNING_MESSAGE);
+				}
+			}
+			else
+			{
+				String message=null;
+				if(size==1)
+					message=exceptions.firstElement().getMessage();
+				else
+				{
+					message="PLease fix the following errors: ";
+					
+					for(int i=0;i<size;i++)
+						message+="\n"+(i+1)+"."+exceptions.get(i).getMessage();
+				}
+				JOptionPane.showMessageDialog(this, message, "Validation Error", JOptionPane.WARNING_MESSAGE);
+			}
+		}
 		}
 	
 		else if(source==btnReset)

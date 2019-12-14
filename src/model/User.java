@@ -15,12 +15,13 @@ public class User
 	private String email;
 	private int userType;
 
-	public User() throws ClassNotFoundException, SQLException
-	{
+	public int addUser() throws ClassNotFoundException, SQLException
+	{		
 		Class.forName("com.mysql.jdbc.Driver");
 		
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
-		PreparedStatement ps= connection.prepareStatement("INSERT INTO user (UserID, Name, PhoneNo, ICNo, Email, Class) VALUES(?, ?, ?, ?, ?, ?)");
+		PreparedStatement ps= connection.prepareStatement(
+				"INSERT INTO user (UserID, Name, PhoneNo, ICNo, Email, Class) VALUES(?, ?, ?, ?, ?, ?)");
 		
 		ps.setInt(1, userID);
 		ps.setString(2, name);
@@ -29,8 +30,10 @@ public class User
 		ps.setString(5, email);
 		ps.setInt(6, userType);
 
-		ps.executeQuery();
+		int status = ps.executeUpdate();
 		
 		connection.close();
+		
+		return status;
 	}
 }

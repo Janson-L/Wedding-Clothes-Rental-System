@@ -208,7 +208,57 @@ public class WedClothManager
 		
 		return users;
 	}
+	
+	public static int addWedCloth(int id,double rent, Boolean dress, String colour, String size) throws ClassNotFoundException, SQLException
+	{ 
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+			PreparedStatement ps = connection.prepareStatement(
+					"INSERT INTO clothes(ClothesID, RentRate,ClothesType,Colour,Size)VALUES(?,?,?,?,?)");
+			
+			ps.setInt(1, id);
+			ps.setDouble(2, rent);
+			ps.setBoolean(3, dress);
+			ps.setString(4, colour);
+			ps.setString(5, size);
+			
+			int status = ps.executeUpdate();
+			
+			connection.close();
+			
+			return status;
+		}
 
+	public static Vector<WedCloth> searchClothes() throws ClassNotFoundException, SQLException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		PreparedStatement ps;
+	
+		Vector<WedCloth> clothes=new Vector<>();
+	
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
+
+
+		ps= connection.prepareStatement("SELECT * FROM Clothes ORDER BY ClothesID;");
+	
+		ResultSet rs=ps.executeQuery();
+	
+			while(rs.next()) {
+				WedCloth wedCloth=new WedCloth();
+				wedCloth.setClothesID(rs.getInt("ClothesID"));
+				wedCloth.setRentRate(rs.getDouble("RentRate"));
+				wedCloth.setClothesType(rs.getBoolean("clothesType"));
+				wedCloth.setColour(rs.getString("Colour"));
+				wedCloth.setSize(rs.getString("Size"));
+			
+				clothes.add(wedCloth);
+			}
+			
+			connection.close();
+	
+			return clothes;
 	}
+}
 
 	

@@ -25,7 +25,7 @@ import controller.validator.RequiredFieldException;
 import controller.validator.Validator;
 import model.Model;
 import model.User;
-import model.WedCloth;
+import controller.manager.WedClothManager;
 
 public class AddClothesDialog extends JDialog implements ActionListener
 {
@@ -124,7 +124,7 @@ public class AddClothesDialog extends JDialog implements ActionListener
 				{
 					int id = Model.getID("Clothes");
 					double x = Double.valueOf(rent.trim()).doubleValue();
-					if(WedCloth.addWedCloth(id, x, dress, colour, size)!=0)
+					if(WedClothManager.addWedCloth(id, x, dress, colour, size)!=0)
 					{
 						if(dress == true)
 							JOptionPane.showMessageDialog(this, "Dress has been added." , "Success", JOptionPane.INFORMATION_MESSAGE);

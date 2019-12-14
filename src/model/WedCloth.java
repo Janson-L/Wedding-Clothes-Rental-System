@@ -7,25 +7,50 @@ import java.sql.SQLException;
 
 public class WedCloth 
 {
+	private int clothesID;
+	private double rentRate;
+	private Boolean clothesType;
+	private String colour;
+	private String size;
 	
-	public static int addWedCloth(int id,double rent, Boolean dress, String colour, String size) throws ClassNotFoundException, SQLException
-	{ 
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
-			PreparedStatement ps = connection.prepareStatement(
-					"INSERT INTO clothes(ClothesID, RentRate,ClothesType,Colour,Size)VALUES(?,?,?,?,?)");
-			
-			ps.setInt(1, id);
-			ps.setDouble(2, rent);
-			ps.setBoolean(3, dress);
-			ps.setString(4, colour);
-			ps.setString(5, size);
-			
-			int status = ps.executeUpdate();
-			
-			connection.close();
-			
-			return status;
-		}
+	public int getClothesID() 
+	{
+		return clothesID;
+	}
+	public void setClothesID(int clothesID) 
+	{
+		this.clothesID = clothesID;
+	}
+	public double getRentRate() 
+	{
+		return rentRate;
+	}
+	public void setRentRate(double rentRate) 
+	{
+		this.rentRate = rentRate;
+	}
+	public Boolean getClothesType() 
+	{
+		return clothesType;
+	}
+	public void setClothesType(Boolean clothesType) 
+	{
+		this.clothesType = clothesType;
+	}
+	public String getColour() 
+	{
+		return colour;
+	}
+	public void setColour(String colour) 
+	{
+		this.colour = colour;
+	}
+	public String getSize() 
+	{
+		return size;
+	}
+	public void setSize(String size) 
+	{
+		this.size = size;
+	}
 }

@@ -3,6 +3,8 @@ package view.gui;
 import javax.swing.JFrame;
 
 import java.sql.SQLException;
+
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -19,7 +21,6 @@ public class UserTableView extends JFrame
         UserTableModel model = new UserTableModel(WedClothManager.searchUser());
         //create the table
         JTable table = new JTable(model);
-        table.setAutoCreateRowSorter(true);
          
         //add the table to the frame
         this.add(new JScrollPane(table));

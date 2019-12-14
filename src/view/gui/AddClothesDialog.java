@@ -5,29 +5,36 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.validator.InvalidNumberException;
+//import controller.validator.InvalidNumberException;
 import controller.validator.MaximumLengthException;
-import controller.validator.MaximumNumberException;
-import controller.validator.MinimumNumberException;
+//import controller.validator.MaximumNumberException;
+//import controller.validator.MinimumNumberException;
 import controller.validator.RequiredFieldException;
 import controller.validator.Validator;
+import model.Model;
+import model.User;
+import model.WedCloth;
 
 public class AddClothesDialog extends JDialog implements ActionListener
 {
 	private static final long serialVersionUID = 1L;
 	
-	private JTextField txtClothesNo = new JTextField();
-	private JTextField txtClothesType = new JTextField();
 	private JTextField txtRent = new JTextField();
+	private JTextField txtColour = new JTextField();
+	private JTextField txtSize = new JTextField();
+	private JCheckBox chkClothesType = new JCheckBox();
 	private JButton btnSubmit=new JButton("Submit");
 	private JButton btnReset=new JButton("Reset");
 	
@@ -42,12 +49,14 @@ public class AddClothesDialog extends JDialog implements ActionListener
 		pnlCenter.setBorder(BorderFactory.createEmptyBorder(10,10,5,10));
 		pnlSouth.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
-		pnlCenter.add(new JLabel("Clothes number:", JLabel.RIGHT));
-		pnlCenter.add(txtClothesNo);
-		pnlCenter.add(new JLabel("ClothesType:", JLabel.RIGHT));
-		pnlCenter.add(txtClothesType);
 		pnlCenter.add(new JLabel("Rent(RM):", JLabel.RIGHT));
 		pnlCenter.add(txtRent);
+		pnlCenter.add(new JLabel("Colour:", JLabel.RIGHT));
+		pnlCenter.add(txtColour);
+		pnlCenter.add(new JLabel("Size (S,M,L,XL):", JLabel.RIGHT));
+		pnlCenter.add(txtSize);
+		pnlCenter.add(new JLabel("Dress?", JLabel.RIGHT));
+		pnlCenter.add(chkClothesType);
 		
 		pnlSouth.add(btnSubmit);
 		pnlSouth.add(btnReset);
@@ -75,34 +84,67 @@ public class AddClothesDialog extends JDialog implements ActionListener
 		if (source==btnSubmit)
 		{
 			Vector<Exception> exceptions =new Vector<>();
-			String clothesNo=null, clothesType=null;
-			double rent=0;
-			
-			
-			try {
-				clothesNo=Validator.validate("Clothes Number", txtClothesNo.getText(), true, 15);
-			}
-			catch (RequiredFieldException | MaximumLengthException e) {
-				// TODO Auto-generated catch block
-				exceptions.add(e);
-			}
+			String colour=null,size=null,rent=null;
+			Boolean dress=chkClothesType.isSelected();
 			
 			try {
-				clothesType=Validator.validate("Clothes Type", txtClothesType.getText(), true,50);
+				colour=Validator.validate("Colour", txtColour.getText(), true,50);
 			} 
 			catch (RequiredFieldException | MaximumLengthException e) {
-				// TODO Auto-generated catch block
 				exceptions.add(e);
 			}
 			
 			try {
-				rent=Validator.validate("Rent", txtRent.getText(), true, true, true, 5, 20);
+				size=Validator.validate("Size", txtSize.getText(), true,50);
 			} 
-			catch (RequiredFieldException | MaximumLengthException | InvalidNumberException | MinimumNumberException
-					| MaximumNumberException e) {
+			catch (RequiredFieldException | MaximumLengthException e) {
 				exceptions.add(e);
 			}
 			
+			
+			try {
+				try {
+					rent = txtRent.getText();
+				double x = Double.valueOf(rent.trim()).doubleValue();
+				}
+				catch(NumberFormatException e) {
+					JOptionPane.showMessageDialog(this, "Please enter a valid number in area 'Rent' .","Unsuccessful",JOptionPane.WARNING_MESSAGE);
+				}
+				double x = Double.valueOf(rent.trim()).doubleValue();
+				x=Validator.validate1("Rent", txtRent.getText(), true,20);
+			} 
+			catch (RequiredFieldException e) {
+				exceptions.add(e);
+			}
+			
+			int size1 =exceptions.size();	
+			if(size1 == 0)
+			{
+				try 
+				{
+					int id = Model.getID("Clothes");
+					double x = Double.valueOf(rent.trim()).doubleValue();
+					if(WedCloth.addWedCloth(id, x, dress, colour, size)!=0)
+					{
+						if(dress == true)
+							JOptionPane.showMessageDialog(this, "Dress has been added." , "Success", JOptionPane.INFORMATION_MESSAGE);
+						else if(dress == false)
+							JOptionPane.showMessageDialog(this, "Suit has been added." , "Success", JOptionPane.INFORMATION_MESSAGE);
+
+						txtRent.setText("");
+						txtColour.setText("");
+						txtSize.setText("");
+						chkClothesType.setText("false");
+						txtRent.grabFocus();
+					}
+					else
+						JOptionPane.showMessageDialog(this, "Unable to add new clothes.","Unsuccessful",JOptionPane.WARNING_MESSAGE);
+				}
+				catch (ClassNotFoundException | SQLException e)
+				{
+						JOptionPane.showMessageDialog(this, e.getMessage(), "Database Error", JOptionPane.WARNING_MESSAGE);
+				}
+			}
 			
 		}
 		
@@ -114,9 +156,11 @@ public class AddClothesDialog extends JDialog implements ActionListener
 	
 	private void reset()
 	{
-		txtClothesNo.setText("");
-		txtClothesType.setText("");
 		txtRent.setText("");
+		txtColour.setText("");
+		txtSize.setText("");
+		chkClothesType.setText("false");
+		txtRent.grabFocus();
 	}
 	
 }

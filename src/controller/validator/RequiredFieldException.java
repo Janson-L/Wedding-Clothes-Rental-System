@@ -8,4 +8,8 @@ private static final long serialVersionUID = 1L;
 	{
 		super(field  + " is required.");
 	}
+	public RequiredFieldException(Double field) 
+	{
+		super(field  + " is required.");
+	}
 }

@@ -7,13 +7,8 @@ import java.sql.SQLException;
 
 public class WedCloth 
 {
-	private int clothID;
-	private Double rentRate;
-	private int type;
-	private String colour;
-	private String size;
 	
-	public WedCloth() throws ClassNotFoundException, SQLException
+	public static int addWedCloth(int id,double rent, Boolean dress, String colour, String size) throws ClassNotFoundException, SQLException
 	{ 
 			Class.forName("com.mysql.jdbc.Driver");
 			
@@ -21,9 +16,9 @@ public class WedCloth
 			PreparedStatement ps = connection.prepareStatement(
 					"INSERT INTO clothes(ClothesID, RentRate,ClothesType,Colour,Size)VALUES(?,?,?,?,?)");
 			
-			ps.setInt(1, clothID);
-			ps.setDouble(2, rentRate);
-			ps.setInt(3, type);
+			ps.setInt(1, id);
+			ps.setDouble(2, rent);
+			ps.setBoolean(3, dress);
 			ps.setString(4, colour);
 			ps.setString(5, size);
 			
@@ -31,5 +26,6 @@ public class WedCloth
 			
 			connection.close();
 			
+			return status;
 		}
 }

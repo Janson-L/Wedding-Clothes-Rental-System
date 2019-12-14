@@ -11,37 +11,30 @@ public class Model
 	public static int getID(String searchType) throws ClassNotFoundException, SQLException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
-		String id,tableName;
+		PreparedStatement ps;
 		
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
-		PreparedStatement ps= connection.prepareStatement("SELECT ? FROM ? DESC LIMIT 1;");
 		if(searchType=="Clothes")
 		{
-			id="ClothesID";
-			tableName="Clothes";
+			ps= connection.prepareStatement("SELECT ClothesID FROM Clothes ORDER BY ClothesID DESC LIMIT 1;");
 		}
 		else if(searchType=="User")
 		{
-			id="UserID";
-			tableName="User";
+			ps= connection.prepareStatement("SELECT UserID FROM User ORDER BY UserID DESC LIMIT 1;");
 		}
 		else if(searchType=="Rental")
 		{
-			id="RentalID";
-			tableName="Rental";
+			ps= connection.prepareStatement("SELECT RentalID FROM Rental ORDER BY RentalID DESC LIMIT 1;");
 		}
 		else if(searchType=="Payment")
 		{
-			id="PaymentID";
-			tableName="Payment";
+			ps= connection.prepareStatement("SELECT PaymentID FROM Payment ORDER BY PaymentID DESC LIMIT 1;");
 		}
 		else {return -1;}
 		
-		ps.setString(1, id);
-		ps.setString(2, tableName);
-
 		ResultSet rs=ps.executeQuery();
 		connection.close();
+		
 		int idDB=0;
 		if(!rs.isBeforeFirst()) {
 			idDB=1;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2019 at 04:13 PM
+-- Generation Time: Dec 14, 2019 at 07:01 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -82,11 +82,19 @@ CREATE TABLE `rental` (
 CREATE TABLE `user` (
   `UserID` int(12) NOT NULL,
   `Name` varchar(255) NOT NULL,
+  `Password` varchar(255) NOT NULL,
   `PhoneNo` varchar(255) NOT NULL,
   `ICNo` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
-  `Class` int(1) NOT NULL
+  `Class` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`UserID`, `Name`, `Password`, `PhoneNo`, `ICNo`, `Email`, `Class`) VALUES
+(1, '123', '123', '123', '123', '123', 1);
 
 --
 -- Indexes for dumped tables

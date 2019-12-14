@@ -20,7 +20,7 @@ import controller.validator.MaximumLengthException;
 import controller.validator.RequiredFieldException;
 import controller.validator.Validator;
 
-public class Windowtest {
+public class LoginView {
 
 	private JFrame frame;
 	private JTextField Username;
@@ -33,7 +33,7 @@ public class Windowtest {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Windowtest window = new Windowtest();
+					LoginView window = new LoginView();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class Windowtest {
 	/**
 	 * Create the application.
 	 */
-	public Windowtest() {
+	public LoginView() {
 		initialize();
 	}
 

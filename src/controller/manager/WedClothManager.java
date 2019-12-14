@@ -154,7 +154,31 @@ public class WedClothManager
 		System.out.println("Size: " + wedCloth.getSize());
 	}
 	
-	public Vector<User> userLookup() throws ClassNotFoundException, SQLException
+	public static int addUser(int id, String name, String password, String phoneNo, String ICNo, String email, Boolean type) throws ClassNotFoundException, SQLException
+	{		
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
+			PreparedStatement ps= connection.prepareStatement(
+					"INSERT INTO user (UserID, Name, Password, PhoneNo, ICNo, Email, Class) VALUES(?, ?, ?, ?, ?, ?, ?)");
+			
+			ps.setInt(1, id);
+			ps.setString(2, name);
+			ps.setString(3, password);
+			ps.setString(4, phoneNo);
+			ps.setString(5, ICNo);
+			ps.setString(6, email);
+			ps.setBoolean(7, type);
+
+			int status = ps.executeUpdate();
+			
+			connection.close();
+			
+			return status;
+
+	}
+	
+	public static Vector<User> searchUser() throws ClassNotFoundException, SQLException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
 		PreparedStatement ps;
@@ -168,11 +192,6 @@ public class WedClothManager
 		
 		ResultSet rs=ps.executeQuery();
 		
-		if(!rs.isBeforeFirst()) {
-			
-		}
-		else {
-		
 			while(rs.next()) {
 				User user=new User();
 				user.setUserID(rs.getInt("userID"));
@@ -181,12 +200,15 @@ public class WedClothManager
 				user.setIcNo(rs.getString("icNo"));
 				user.setEmail(rs.getString("email"));
 				user.setUserType(rs.getBoolean("class"));
+				
+				users.add(user);
 			}
 			
 		connection.close();
 		
 		return users;
 	}
-}
+
+	}
 
 	

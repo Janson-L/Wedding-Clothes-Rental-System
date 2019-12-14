@@ -1,17 +1,14 @@
-package view.gui;
-import java.util.List;
+package model;
+import java.sql.SQLException;
+import java.util.Vector;
+
 import javax.swing.table.AbstractTableModel;
 
-public class ViewTable {
-	
 	public class UserTableModel extends AbstractTableModel
 	{
-	    /**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 
-		//id, name,password, phoneNo, icNo, email, admin
+		private Vector<User> users;
 	     
 	    private final String[] columnNames = new String[] {
 	            "ID", "Name", "phoneNo", "IC No","Email","Admin"
@@ -20,9 +17,9 @@ public class ViewTable {
 	        Integer.class, String.class, String.class, String.class, String.class, Boolean.class
 	    };
 	 
-	    public EmployeeTableModel(List<Employee> employeeList)
+	    public UserTableModel(Vector<User> users) throws ClassNotFoundException, SQLException
 	    {
-	    	
+	    	this.users=users;
 	    }
 	     
 	    @Override
@@ -46,27 +43,33 @@ public class ViewTable {
 	    @Override
 	    public int getRowCount()
 	    {
-	        return employeeList.size();
+	        return users.size();
 	    }
 	 
 	    @Override
 	    public Object getValueAt(int rowIndex, int columnIndex)
 	    {
-	        Employee row = employeeList.get(rowIndex);
+	        User row = users.get(rowIndex);
 	        if(0 == columnIndex) {
-	            return row.getId();
+	            return row.getUserID();
 	        }
 	        else if(1 == columnIndex) {
-	            return row.getName();
+	            return row.getPassword();
 	        }
 	        else if(2 == columnIndex) {
-	            return row.getHourlyRate();
+	            return row.getPhoneNo();
 	        }
 	        else if(3 == columnIndex) {
-	            return row.isPartTime();
+	            return row.getIcNo();
+	        }
+	        else if(4 == columnIndex) {
+	            return row.getEmail();
+	        }
+	        else if(5 == columnIndex) {
+	            return row.isUserType();
 	        }
 	        return null;
 	    }
 }
-}
+
 

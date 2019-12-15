@@ -110,6 +110,10 @@ public class ManageRentalsDialog extends JDialog implements ActionListener
 		{
 			new UpdateClothesDialog(this);
 		}
+		else if(source == btnDeleteClothes)
+		{
+			new DeleteClothesDialog(this);
+		}
 		
 	}
 	

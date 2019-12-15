@@ -85,7 +85,7 @@ public class UpdateClothesDialog extends JDialog implements ActionListener
 			
 			try 
 			{
-				i=Validator.validate("Phone number", txtClothesNo.getText(), true, 15);
+				i=Validator.validate("Clothes ID", txtClothesNo.getText(), true, 15);
 			} 
 			catch (RequiredFieldException | MaximumLengthException e) 
 			{

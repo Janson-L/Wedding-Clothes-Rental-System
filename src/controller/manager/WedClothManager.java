@@ -130,6 +130,23 @@ public class WedClothManager
 		
 		return status;
 	}
+	
+	public static int deleteWedCloth(int id) throws ClassNotFoundException, SQLException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		PreparedStatement ps = connection.prepareStatement(
+				"DELETE FROM clothes WHERE ClothesID = ?");
+		
+		ps.setInt(1, id);
+		
+		int status = ps.executeUpdate();
+		
+		connection.close();
+		
+		return status;
+	}
 
 	
 	public static void deleteWedCloth() throws SQLException, ClassNotFoundException

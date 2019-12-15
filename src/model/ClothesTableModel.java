@@ -11,7 +11,7 @@ import javax.swing.table.AbstractTableModel;
 		private Vector<WedCloth> clothes;
 	     
 	    private final String[] columnNames = new String[] {
-	            "ClothesID", "RentRate", "ClothesType", "Colour","Size"
+	            "ClothesID", "RentRate", "Dress", "Colour","Size"
 	    };
 	    private final Class[] columnClass = new Class[] {
 	        Integer.class, String.class, Boolean.class, String.class, String.class

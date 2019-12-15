@@ -112,23 +112,23 @@ public class WedClothManager
 		connection.close();
 	} 	
 	
-	public static int updateWedCloth(WedCloth wedCloth)
+	public static int updateWedCloth(Double rent, Boolean dress, int id) throws ClassNotFoundException, SQLException
 	{
-		/*int index=-1;
-		for(int i=0;i<wedClothes.length;i++)
-		{
-			WedCloth temp=wedClothes[i];
-			
-			if (temp!=null && temp.getUniqueID()==wedCloth.getUniqueID())
-			{
-				wedClothes[i]=wedCloth;
-				index=i;
-				
-				break;
-			}
-		}
-		return index;*/
-		return -1;
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		PreparedStatement ps = connection.prepareStatement(
+				"UPDATE clothes SET RentRate = ?, ClothesType = ? WHERE ClothesID = ?");
+		
+		ps.setDouble(1, rent);
+		ps.setBoolean(2, dress);
+		ps.setInt(3, id);
+		
+		int status = ps.executeUpdate();
+		
+		connection.close();
+		
+		return status;
 	}
 
 	

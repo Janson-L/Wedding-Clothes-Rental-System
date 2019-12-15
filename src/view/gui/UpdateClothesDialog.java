@@ -5,20 +5,30 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import controller.manager.WedClothManager;
+import controller.validator.MaximumLengthException;
+import controller.validator.RequiredFieldException;
+import controller.validator.Validator;
+import model.Model;
 
 public class UpdateClothesDialog extends JDialog implements ActionListener
 {
 	private static final long serialVersionUID = 1L;
 	
 	private JTextField txtClothesNo = new JTextField();
-	private JTextField txtClothesType = new JTextField();
+	private JCheckBox chkClothesType = new JCheckBox();
 	private JTextField txtRent = new JTextField();
 	private JButton btnSubmit=new JButton("Submit");
 	private JButton btnReset=new JButton("Reset");
@@ -36,8 +46,8 @@ public class UpdateClothesDialog extends JDialog implements ActionListener
 		
 		pnlCenter.add(new JLabel("Clothes number:", JLabel.RIGHT));
 		pnlCenter.add(txtClothesNo);
-		pnlCenter.add(new JLabel("New Clothes Type:", JLabel.RIGHT));
-		pnlCenter.add(txtClothesType);
+		pnlCenter.add(new JLabel("New Clothes Type (Dress?)", JLabel.RIGHT));
+		pnlCenter.add(chkClothesType);
 		pnlCenter.add(new JLabel("New Rent(RM):", JLabel.RIGHT));
 		pnlCenter.add(txtRent);
 		
@@ -66,8 +76,72 @@ public class UpdateClothesDialog extends JDialog implements ActionListener
 		Object source = event.getSource();
 		if (source==btnSubmit)
 		{
+			Vector<Exception> exceptions= new Vector<>();
+			String i=txtClothesNo.getText();
+			int id;
+			Boolean dress = chkClothesType.isSelected();
+			String rent = null;
+			Double x = null;
+			
+			try 
+			{
+				i=Validator.validate("Phone number", txtClothesNo.getText(), true, 15);
+			} 
+			catch (RequiredFieldException | MaximumLengthException e) 
+			{
+				exceptions.add(e);
+			}
+			
+			try {
+				try {
+					rent = txtRent.getText();
+					x = Double.valueOf(rent.trim()).doubleValue();
+				}
+				catch(NumberFormatException e) {
+					JOptionPane.showMessageDialog(this, "Please enter a valid number in area 'Rent' .","Unsuccessful",JOptionPane.WARNING_MESSAGE);
+				}
+				x = Double.valueOf(rent.trim()).doubleValue();
+				x=Validator.validate1("Rent", txtRent.getText(), true,20);
+			} 
+			catch (RequiredFieldException e) {
+				exceptions.add(e);
+			}
+			
+			int size=exceptions.size();	
+			if(size==0)
+			{
+				try 
+				{
+					id = Integer.parseInt(i);
+					if(WedClothManager.updateWedCloth(x, dress, id)!=0)
+					{
+						JOptionPane.showMessageDialog(this, "Clothes has been updated." , "Success", JOptionPane.INFORMATION_MESSAGE);
+						reset();
+					}
+					else
+						JOptionPane.showMessageDialog(this, "Unable to update clothes.","Unsuccessful",JOptionPane.WARNING_MESSAGE);
+				}
+				catch (ClassNotFoundException | SQLException e)
+				{
+						JOptionPane.showMessageDialog(this, e.getMessage(), "Database Error", JOptionPane.WARNING_MESSAGE);
+				}
+			}
+			else
+			{
+				String message=null;
+				if(size==1)
+					message=exceptions.firstElement().getMessage();
+				else
+				{
+					message="PLease fix the following errors: ";
+						
+					for(int z=0;z<size;z++)
+						message+="\n"+(z+1)+"."+exceptions.get(z).getMessage();
+				}
+					JOptionPane.showMessageDialog(this, message, "Validation Error", JOptionPane.WARNING_MESSAGE);
+			}
 			reset();
-		}
+		}	
 		
 		else if(source==btnReset)
 		{
@@ -78,7 +152,7 @@ public class UpdateClothesDialog extends JDialog implements ActionListener
 	private void reset()
 	{
 		txtClothesNo.setText("");
-		txtClothesType.setText("");
+		chkClothesType.setSelected(false);
 		txtRent.setText("");
 	}
 	

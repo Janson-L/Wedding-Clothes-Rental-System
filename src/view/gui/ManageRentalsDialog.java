@@ -2,6 +2,7 @@ package view.gui;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -97,11 +98,18 @@ public class ManageRentalsDialog extends JDialog implements ActionListener
 		{
 			new AddClothesDialog(this);
 		}
-		
-		
-		
-		
-		// TODO Auto-generated method stub
+		else if (source == btnViewAllClothes)
+		{
+			try {
+				new ClothesView(this);
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		else if(source == btnUpdateClothes)
+		{
+			new UpdateClothesDialog(this);
+		}
 		
 	}
 	

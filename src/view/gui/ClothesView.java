@@ -16,7 +16,7 @@ public class ClothesView extends JDialog
 {
 	private static final long serialVersionUID = 1L;
 	
-	public ClothesView(ManageRentalsDialog dialog) throws ClassNotFoundException, SQLException
+	public ClothesView(ManageClothesDialog dialog) throws ClassNotFoundException, SQLException
     {
 		super(dialog, "View Clothes", true);
         ClothesTableModel model = new ClothesTableModel(WedClothManager.searchClothes());
@@ -28,7 +28,8 @@ public class ClothesView extends JDialog
         this.add(new JScrollPane(table));
          
         this.setTitle("Clothes Table");
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);       
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(dialog);
         this.pack();
         this.setVisible(true);
     }

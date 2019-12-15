@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-public class ManageRentalsDialog extends JDialog implements ActionListener
+public class ManageClothesDialog extends JDialog implements ActionListener
 
 {
 	private static final long serialVersionUID=1L;
@@ -21,7 +21,7 @@ public class ManageRentalsDialog extends JDialog implements ActionListener
 	private JButton btnViewClothesByColour=new JButton("View Clothes by Colour");
 	private JButton btnViewSingleClothes=new JButton("View Single Wedding Clothes");
 	
-	public ManageRentalsDialog(MainFrame frame)
+	public ManageClothesDialog(MainFrame frame)
 	{
 		super(frame, "Manage Rentals", true);
 		
@@ -55,9 +55,9 @@ public class ManageRentalsDialog extends JDialog implements ActionListener
 
 	
 
-	public ManageRentalsDialog(MainFrameUser frame) 
+	public ManageClothesDialog(MainFrameUser frame) 
 	{
-		super(frame, "Manage Rentals", true);
+		super(frame, "Manage Clothes", true);
 		
 		GridLayout layout = new GridLayout(8,1,10,10);
 		

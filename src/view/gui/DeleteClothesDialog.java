@@ -1,6 +1,7 @@
 package view.gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -16,17 +17,23 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import controller.manager.WedClothManager;
 import controller.validator.MaximumLengthException;
 import controller.validator.RequiredFieldException;
 import controller.validator.Validator;
+import model.ClothesTableModel;
+import view.gui.ClothesView;
 
 public class DeleteClothesDialog extends JDialog implements ActionListener 
 {
@@ -37,7 +44,7 @@ public class DeleteClothesDialog extends JDialog implements ActionListener
 	private JButton btnDelete = new JButton("Delete");
 	private JButton btnReset = new JButton("Reset");
 	
-	public DeleteClothesDialog(ManageRentalsDialog dialog)
+	public DeleteClothesDialog(ManageClothesDialog dialog)
 	{
 		super(dialog, "Delete Clothes", true);
 		

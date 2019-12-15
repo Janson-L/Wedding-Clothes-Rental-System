@@ -43,8 +43,8 @@ public class MainFrame extends JFrame implements ActionListener
 	{
 		Object source=event.getSource();
 		
-		if(source==btnManageRentals) {
-			new ManageRentalsDialog(this);
+		if(source==btnManageWedCloth) {
+			new ManageClothesDialog(this);
 		}
 		else if(source==btnManageUser) {
 			new ManageUserDialog(this);

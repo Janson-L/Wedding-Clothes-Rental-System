@@ -39,7 +39,7 @@ public class AddClothesDialog extends JDialog implements ActionListener
 	private JButton btnReset=new JButton("Reset");
 	
 	
-	public AddClothesDialog (ManageRentalsDialog dialog)
+	public AddClothesDialog (ManageClothesDialog dialog)
 	{
 		super(dialog, "Add Clothes",true);
 		

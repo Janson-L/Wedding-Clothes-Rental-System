@@ -44,6 +44,8 @@ public class TestXia extends JDialog
         contentPane.add(new JScrollPane(table), BorderLayout.CENTER);
         contentPane.add(btnDelete, BorderLayout.SOUTH);
         
+        
+       //hello yy here
         //add the table to the frame
         //panel.add(new JScrollPane(table));
         //frame.add(panel);

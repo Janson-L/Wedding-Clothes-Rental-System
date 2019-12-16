@@ -43,7 +43,7 @@ public class AddClothesDialog extends JDialog implements ActionListener
 	{
 		super(dialog, "Add Clothes",true);
 		
-		JPanel pnlCenter=new JPanel(new GridLayout(3,2,10,10));
+		JPanel pnlCenter=new JPanel(new GridLayout(4,2,10,10));
 		JPanel pnlSouth=new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		
 		pnlCenter.setBorder(BorderFactory.createEmptyBorder(10,10,5,10));

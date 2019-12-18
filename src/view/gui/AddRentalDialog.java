@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Vector;
+import java.sql.Date; 
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -51,7 +52,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 		
 		pnlCenter.add(new JLabel("Date:", JLabel.RIGHT));
 		pnlCenter.add(txtDate);
-		pnlCenter.add(new JLabel("Duration:", JLabel.RIGHT));
+		pnlCenter.add(new JLabel("Duration (Days):", JLabel.RIGHT));
 		pnlCenter.add(txtDuration);
 		pnlCenter.add(new JLabel("Total(RM):", JLabel.RIGHT));
 		pnlCenter.add(txtTotal);
@@ -157,7 +158,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 		txtDate.setText("");
 		txtDuration.setText("");
 		txtTotal.setText("");
-		txtRent.grabFocus();
+		txtDate.grabFocus();
 	}
 	
 }

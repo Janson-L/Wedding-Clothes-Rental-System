@@ -90,6 +90,14 @@ public class AddRentalDialog extends JDialog implements ActionListener
 			String rentDate=null;
 			String duration=null;
 			String total=null;
+			int Uid=0;
+			
+			try {
+				rentDate=Validator.validate("Date", txtRentDate.getText(), true,50);
+			} 
+			catch (RequiredFieldException | MaximumLengthException e) {
+				exceptions.add(e);
+			}
 			
 			try {
 				rentDate=Validator.validate("Date", txtRentDate.getText(), true,50);
@@ -171,6 +179,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 		txtRentDate.setText("");
 		txtDuration.setText("");
 		txtTotal.setText("");
+		txtUid.setText("");
 		txtRentDate.grabFocus();
 	}
 	

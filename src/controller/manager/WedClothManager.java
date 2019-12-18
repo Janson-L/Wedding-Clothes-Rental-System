@@ -366,6 +366,28 @@ public class WedClothManager
 	
 			return rentals;
 	}
+	
+	public static int addPayment(int id, Boolean paid,String paymentDate) throws ClassNotFoundException, SQLException
+	{ 
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+			PreparedStatement ps = connection.prepareStatement(
+					"INSERT INTO clothes(PaymentID,Paid,PaymentDate)VALUES(?,?,?)");
+			
+			java.sql.Date paydate = java.sql.Date.valueOf(paymentDate);
+			
+			ps.setInt(1, id);
+			ps.setBoolean(2, paid);
+			ps.setDate(3, paydate);
+		
+			
+			int payment = ps.executeUpdate();
+			
+			connection.close();
+			
+			return payment;
+		}
 }
 
 	

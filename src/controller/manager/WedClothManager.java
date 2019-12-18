@@ -1,5 +1,6 @@
 package controller.manager;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -275,6 +276,57 @@ public class WedClothManager
 			connection.close();
 	
 			return clothes;
+	}
+	
+	public static int addRental(int id,String rentDate, double duration, double total) throws ClassNotFoundException, SQLException
+	{ 
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+			PreparedStatement ps = connection.prepareStatement(
+					"INSERT INTO clothes(RentalID, Date,Duration,Total)VALUES(?,?,?,?,?)");
+			Date date=Date.valueOf(rentDate);//converting string into sql date  
+			
+			ps.setInt(1, id);
+			ps.setString(2, rentDate);
+			ps.setDouble(3, duration);
+			ps.setDouble(4, total);
+			
+			
+			int status = ps.executeUpdate();
+			
+			connection.close();
+			
+			return status;
+		}
+	
+	public static int deleteRental(int id) throws ClassNotFoundException, SQLException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		PreparedStatement ps = connection.prepareStatement(
+				"DELETE FROM rental WHERE RentalID = ?");
+		
+		ps.setInt(1, id);
+		
+		int status = ps.executeUpdate();
+		
+		connection.close();
+		
+		return status;
+	}
+	
+	public static void deleteRental() throws SQLException, ClassNotFoundException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		//WHERE havent complete
+		PreparedStatement ps=connection.prepareStatement("DELETE * FROM rental WHERE");
+		ResultSet rs=ps.executeQuery();
+		
+		connection.close();
 	}
 }
 

@@ -33,7 +33,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 {
 	private static final long serialVersionUID = 1L;
 	
-	private JTextField txtDate = new JTextField();
+	private JTextField txtRentDate = new JTextField();
 	private JTextField txtDuration = new JTextField();
 	private JTextField txtTotal = new JTextField();
 	private JButton btnSubmit=new JButton("Submit");
@@ -51,7 +51,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 		pnlSouth.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
 		pnlCenter.add(new JLabel("Date:", JLabel.RIGHT));
-		pnlCenter.add(txtDate);
+		pnlCenter.add(txtRentDate);
 		pnlCenter.add(new JLabel("Duration (Days):", JLabel.RIGHT));
 		pnlCenter.add(txtDuration);
 		pnlCenter.add(new JLabel("Total(RM):", JLabel.RIGHT));
@@ -84,60 +84,70 @@ public class AddRentalDialog extends JDialog implements ActionListener
 		if (source==btnSubmit)
 		{
 			Vector<Exception> exceptions =new Vector<>();
-			String date=null,duration=null,total=null;
+			String rentDate=null;
+			String duration=null;
+			String total=null;
 			
 			try {
-				duration=Validator.validate("Duration", txtDuration.getText(), true,50);
+				rentDate=Validator.validate("Date", txtRentDate.getText(), true,50);
 			} 
 			catch (RequiredFieldException | MaximumLengthException e) {
 				exceptions.add(e);
 			}
-			
-			try {
-				total=Validator.validate("Total", txtSize.getText(), true,50);
-			} 
-			catch (RequiredFieldException | MaximumLengthException e) {
-				exceptions.add(e);
-			}
-			
 			
 			try {
 				try {
-					rent = txtRent.getText();
-				double x = Double.valueOf(rent.trim()).doubleValue();
+					duration = txtDuration.getText();
+				double x = Double.valueOf(duration.trim()).doubleValue();
 				}
 				catch(NumberFormatException e) {
-					JOptionPane.showMessageDialog(this, "Please enter a valid number in area 'Rent' .","Unsuccessful",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Please enter a valid number in area 'Duration' .","Unsuccessful",JOptionPane.WARNING_MESSAGE);
 				}
-				double x = Double.valueOf(rent.trim()).doubleValue();
-				x=Validator.validate1("Rent", txtRent.getText(), true,20);
+				double x = Double.valueOf(duration.trim()).doubleValue();
+				x=Validator.validate1("Duration", txtDuration.getText(), true,20);
 			} 
 			catch (RequiredFieldException e) {
 				exceptions.add(e);
 			}
+			
+			try {
+				try {
+					total = txtTotal.getText();
+				double x = Double.valueOf(total.trim()).doubleValue();
+				}
+				catch(NumberFormatException e) {
+					JOptionPane.showMessageDialog(this, "Please enter a valid number in area 'Total' .","Unsuccessful",JOptionPane.WARNING_MESSAGE);
+				}
+				double x = Double.valueOf(total.trim()).doubleValue();
+				x=Validator.validate1("Total", txtTotal.getText(), true,20);
+			} 
+			catch (RequiredFieldException e) {
+				exceptions.add(e);
+			}
+			
+			
 			
 			int size1 =exceptions.size();	
 			if(size1 == 0)
 			{
 				try 
 				{
-					int id = Model.getID("Clothes");
-					double x = Double.valueOf(rent.trim()).doubleValue();
-					if(WedClothManager.addWedCloth(id, x, dress, colour, size)!=0)
+					int id = Model.getID("Rental");
+					double x = Double.valueOf(total.trim()).doubleValue();
+					double y = Double.valueOf(duration.trim()).doubleValue();
+					if(WedClothManager.addRental(id, rentDate, y, x)!=0)
 					{
-						if(dress == true)
-							JOptionPane.showMessageDialog(this, "Dress has been added." , "Success", JOptionPane.INFORMATION_MESSAGE);
-						else if(dress == false)
-							JOptionPane.showMessageDialog(this, "Suit has been added." , "Success", JOptionPane.INFORMATION_MESSAGE);
+				
+							JOptionPane.showMessageDialog(this, "Rental has been added" , "Success", JOptionPane.INFORMATION_MESSAGE);
+	
 
-						txtRent.setText("");
-						txtColour.setText("");
-						txtSize.setText("");
-						chkClothesType.setText("false");
-						txtRent.grabFocus();
+						txtRentDate.setText("");
+						txtDuration.setText("");
+						txtTotal.setText("");
+						txtRentDate.grabFocus();
 					}
 					else
-						JOptionPane.showMessageDialog(this, "Unable to add new clothes.","Unsuccessful",JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(this, "Unable to add new rental","Unsuccessful",JOptionPane.WARNING_MESSAGE);
 				}
 				catch (ClassNotFoundException | SQLException e)
 				{
@@ -155,10 +165,10 @@ public class AddRentalDialog extends JDialog implements ActionListener
 	
 	private void reset()
 	{
-		txtDate.setText("");
+		txtRentDate.setText("");
 		txtDuration.setText("");
 		txtTotal.setText("");
-		txtDate.grabFocus();
+		txtRentDate.grabFocus();
 	}
 	
 }

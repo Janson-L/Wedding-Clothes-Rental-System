@@ -18,7 +18,7 @@ public class RentalView extends JFrame
 	
 	public RentalView() throws ClassNotFoundException, SQLException
     {
-        RentalTableModel model = new RentalTableModel(WedClothManager.searchUser());//rental thing havent create
+        RentalTableModel model = new RentalTableModel(WedClothManager.searchRental());//rental thing havent create
         //create the table
         JTable table = new JTable(model);
         table.setAutoCreateRowSorter(true);
@@ -40,7 +40,7 @@ public class RentalView extends JFrame
             @Override
             public void run() {
                 try {
-					new RentalTableView();
+					new RentalView();
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -162,16 +162,6 @@ public class WedClothManager
 		
 		connection.close();
 	}
-
-	@SuppressWarnings("unused")
-	private static void displayWedCloth()
-	{
-		System.out.println("Wedding Cloth ID: " + wedCloth.getCloth_ID());
-		System.out.println("Rent Rate: RM" + wedCloth.getRentRate());
-		System.out.println("Type: " + wedCloth.getClothesType());
-		System.out.println("Color: " + wedCloth.getColour());
-		System.out.println("Size: " + wedCloth.getSize());
-	}
 	
 	public static int addUser(int id, String name, String password, String phoneNo, String ICNo, String email, Boolean type) throws ClassNotFoundException, SQLException
 	{		
@@ -279,13 +269,13 @@ public class WedClothManager
 			return clothes;
 	}
 	
-	public static int addRental(int id,String rentDate, double duration, double total) throws ClassNotFoundException, SQLException
+	public static int addRental(int id,String rentDate, double duration, double total, int Uid) throws ClassNotFoundException, SQLException
 	{ 
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
 			PreparedStatement ps = connection.prepareStatement(
-					"INSERT INTO clothes(RentalID,Date,Duration,Total)VALUES(?,?,?,?)");
+					"INSERT INTO rental(RentalID,Date,Duration,Total,UserID)VALUES(?,?,?,?,?)");
 			
 			//just another alternative,ignore this
 			//long millis=System.currentTimeMillis();  
@@ -299,6 +289,7 @@ public class WedClothManager
 			ps.setDate(2, date);
 			ps.setDouble(3, duration);
 			ps.setDouble(4, total);
+			ps.setInt(5, Uid);
 			
 			
 			int status = ps.executeUpdate();

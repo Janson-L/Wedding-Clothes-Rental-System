@@ -51,7 +51,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 		pnlCenter.setBorder(BorderFactory.createEmptyBorder(10,10,5,10));
 		pnlSouth.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
-		pnlCenter.add(new JLabel("Date:", JLabel.RIGHT));
+		pnlCenter.add(new JLabel("Date: (Format->'Year-Month-Day'):", JLabel.RIGHT));
 		pnlCenter.add(txtRentDate);
 		pnlCenter.add(new JLabel("Duration (Days):", JLabel.RIGHT));
 		pnlCenter.add(txtDuration);
@@ -90,7 +90,8 @@ public class AddRentalDialog extends JDialog implements ActionListener
 			String rentDate=null;
 			String duration=null;
 			String total=null;
-			int Uid=0;
+			int uid;
+			String z=null;
 			
 			try {
 				rentDate=Validator.validate("Date", txtRentDate.getText(), true,50);
@@ -136,9 +137,21 @@ public class AddRentalDialog extends JDialog implements ActionListener
 				exceptions.add(e);
 			}
 			
+			try 
+			{
+				z=Validator.validate("Clothes ID", txtUid.getText(), true, 15);
+			} 
+			catch (RequiredFieldException | MaximumLengthException e) 
+			{
+				exceptions.add(e);
+			}
 			
 			
-			int size1 =exceptions.size();	
+			
+			
+			
+			int size1 =exceptions.size();
+			uid= Integer.parseInt(z);
 			if(size1 == 0)
 			{
 				try 
@@ -146,7 +159,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 					int id = Model.getID("Rental");
 					double x = Double.valueOf(total.trim()).doubleValue();
 					double y = Double.valueOf(duration.trim()).doubleValue();
-					if(WedClothManager.addRental(id, rentDate, y, x)!=0)
+					if(WedClothManager.addRental(id, rentDate, y, x,uid)!=0)
 					{
 				
 							JOptionPane.showMessageDialog(this, "Rental has been added" , "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -155,6 +168,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 						txtRentDate.setText("");
 						txtDuration.setText("");
 						txtTotal.setText("");
+						txtUid.setText("");
 						txtRentDate.grabFocus();
 					}
 					else

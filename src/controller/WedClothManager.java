@@ -1,25 +1,11 @@
-package controller.manager;
 import java.util.Vector;
 
 import model.WedCloth;
 
 public class WedClothManager
 {
-	private static Vector<WedCloth> wedCloth = new Vector<>();
-	
-	public static int addDress(WedCloth Dress)
-	{
-		WedCloth.add(wedCloth);
-		
-		if (Wedcloth Dress == 0)
-		{
-			
-		}else
-		{
-			return 0;
-		}
-	}
-	
+	private static Vector<WedCloth> wedClothes = new Vector<>();
+
 	private static boolean addWedCloth(WedCloth wedCloth)
 	{
 		return wedClothes.add(wedCloth);
@@ -42,7 +28,7 @@ public class WedClothManager
 	}
 	
 	
-	public static Vector<WedCloth> getWedClothes(String color)
+	public static Vector<WedCloth> getWedCothes(String color)
 	{
 		Vector<WedCloth> temp = new Vector<WedCloth>();
 		
@@ -69,7 +55,7 @@ public class WedClothManager
 		return temp;
 	} 
 
-	public static Vector<WedCloth> getWedClothes(String size)
+	public static Vector<WedCloth> getWedCothes(String size)
 	{
 		Vector<WedCloth> temp = new Vector<WedCloth>();
 		
@@ -120,14 +106,14 @@ public class WedClothManager
 	}
 
 	@SuppressWarnings("unused")
-	private static void displayWedCloth(WedCloth wedCloth)
+	private static void displayWedCloth(WedCoth wedCloth)
 	{
 		System.out.println();
 		System.out.println("Wedding Cloth ID: " + wedCloth.getUniqueID());
 		System.out.println("Color " + wedCloth.getColor());
-		System.out.println("Type: " + wedCloth.getType());
+		System.out.println("Type: " + wedCoth.getType());
 		System.out.println("Rental Fee: RM" + wedCloth.getRentalFee());
-		System.out.println("Size: " + wedCloth.getSize());
+		System.out.println("Size: " + wedCoth.getSize());
 	}
 }
 

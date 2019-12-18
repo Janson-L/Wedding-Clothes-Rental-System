@@ -1,66 +1,66 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class User 
-{	
-	
-	private int userID;
-	private String password;
+{
+	//private int userID;
 	private String phoneNo;
-	private String icNo;
+	private String ic;
+	private String name;
 	private String email;
-	private boolean userType;
+	private String userType;
 
-	public int getUserID() {
-		return userID;
+	public User(int userID)
+	{
+		
 	}
 
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getPhoneNo() {
+	public String getPhoneNo()
+	{
 		return phoneNo;
 	}
 
-	public void setPhoneNo(String phoneNo) {
+	public String getIC()
+	{
+		return ic;
+	}
+
+	public void setIC(String ic)
+	{
+		this.ic=ic;
+	}
+
+	public void setPhoneNo(String phoneNo)
+	{
 		this.phoneNo = phoneNo;
 	}
 
-	public String getIcNo() {
-		return icNo;
+	public String getName()
+	{
+		return name;
 	}
 
-	public void setIcNo(String icNo) {
-		this.icNo = icNo;
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 
-	public String getEmail() {
+	public String getEmail()
+	{
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String email)
+	{
+		this.email=email;
 	}
 
-	public boolean isUserType() {
+	public String getUserType()
+	{
 		return userType;
 	}
 
-	public void setUserType(boolean userType) {
+	public void setUserType(String userType)
+	{
 		this.userType = userType;
 	}
 }

@@ -36,6 +36,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 	private JTextField txtRentDate = new JTextField();
 	private JTextField txtDuration = new JTextField();
 	private JTextField txtTotal = new JTextField();
+	private JTextField txtUid = new JTextField();
 	private JButton btnSubmit=new JButton("Submit");
 	private JButton btnReset=new JButton("Reset");
 	
@@ -44,7 +45,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 	{
 		super(dialog, "Add Rental",true);
 		
-		JPanel pnlCenter=new JPanel(new GridLayout(3,2,10,10));
+		JPanel pnlCenter=new JPanel(new GridLayout(4,2,10,10));
 		JPanel pnlSouth=new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		
 		pnlCenter.setBorder(BorderFactory.createEmptyBorder(10,10,5,10));
@@ -56,6 +57,8 @@ public class AddRentalDialog extends JDialog implements ActionListener
 		pnlCenter.add(txtDuration);
 		pnlCenter.add(new JLabel("Total(RM):", JLabel.RIGHT));
 		pnlCenter.add(txtTotal);
+		pnlCenter.add(new JLabel("UserID: ",JLabel.RIGHT));
+		pnlCenter.add(txtUid);
 		
 		
 		pnlSouth.add(btnSubmit);

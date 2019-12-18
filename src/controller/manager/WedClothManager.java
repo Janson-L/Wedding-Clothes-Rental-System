@@ -279,18 +279,23 @@ public class WedClothManager
 			return clothes;
 	}
 	
-	public static int addRental(int id,String rentDate, int duration, double total) throws ClassNotFoundException, SQLException
+	public static int addRental(int id,String rentDate, double duration, double total) throws ClassNotFoundException, SQLException
 	{ 
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
 			PreparedStatement ps = connection.prepareStatement(
-					"INSERT INTO clothes(RentalID, Date,Duration,Total)VALUES(?,?,?,?,?)");
-			Date date=Date.valueOf(rentDate);//converting string into sql date  
+					"INSERT INTO clothes(RentalID,Date,Duration,Total)VALUES(?,?,?,?)");
+			//long millis=System.currentTimeMillis();  
+			//long longDate = Long.parseLong(rentDate);
+	        //java.sql.Date date=new java.sql.Date(longDate); 
+	        
+			java.sql.Date date = java.sql.Date.valueOf(rentDate);//converting string into sql date  
+	        System.out.println(date); 
 			
 			ps.setInt(1, id);
-			ps.setString(2, rentDate);
-			ps.setInt(3, duration);
+			ps.setDate(2, date);
+			ps.setDouble(3, duration);
 			ps.setDouble(4, total);
 			
 			

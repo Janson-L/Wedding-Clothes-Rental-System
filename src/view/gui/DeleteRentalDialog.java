@@ -44,7 +44,7 @@ public class DeleteRentalDialog extends JDialog implements ActionListener
 	private JButton btnDelete = new JButton("Delete");
 	private JButton btnReset = new JButton("Reset");
 	
-	public DeleteRentalDialog(ManageClothesDialog dialog)
+	public DeleteRentalDialog(ManageRentalsDialog dialog)
 	{
 		super(dialog, "Delete Rental", true);
 		

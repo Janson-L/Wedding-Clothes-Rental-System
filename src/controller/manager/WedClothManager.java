@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.Vector;
 
+import model.Rental;
 import model.User;
 import model.WedCloth;
 
@@ -278,7 +279,7 @@ public class WedClothManager
 			return clothes;
 	}
 	
-	public static int addRental(int id,String rentDate, double duration, double total) throws ClassNotFoundException, SQLException
+	public static int addRental(int id,String rentDate, int duration, double total) throws ClassNotFoundException, SQLException
 	{ 
 			Class.forName("com.mysql.jdbc.Driver");
 			
@@ -289,7 +290,7 @@ public class WedClothManager
 			
 			ps.setInt(1, id);
 			ps.setString(2, rentDate);
-			ps.setDouble(3, duration);
+			ps.setInt(3, duration);
 			ps.setDouble(4, total);
 			
 			
@@ -327,6 +328,36 @@ public class WedClothManager
 		ResultSet rs=ps.executeQuery();
 		
 		connection.close();
+	}
+	
+	public static Vector<WedCloth> searchRental() throws ClassNotFoundException, SQLException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		PreparedStatement ps;
+	
+		Vector<WedCloth> rentals=new Vector<>();
+	
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
+
+
+		ps= connection.prepareStatement("SELECT * FROM Clothes ORDER BY ClothesID;");
+	
+		ResultSet rs=ps.executeQuery();
+	
+			while(rs.next()) {
+				Rental rental=new Rental();
+				rental.setClothesID(rs.getInt("ClothesID"));
+				rental.setRentRate(rs.getDouble("RentRate"));
+				rental.setClothesType(rs.getBoolean("clothesType"));
+				rental.setColour(rs.getString("Colour"));
+				rental.setSize(rs.getString("Size"));
+			
+				rentals.add(wedCloth);
+			}
+			
+			connection.close();
+	
+			return rentals;
 	}
 }
 

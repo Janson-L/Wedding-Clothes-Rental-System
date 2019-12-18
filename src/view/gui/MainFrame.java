@@ -49,10 +49,10 @@ public class MainFrame extends JFrame implements ActionListener
 		else if(source==btnManageUser) {
 			new ManageUserDialog(this);
 		}
-		//else if(source==btnManageRentals)
-		//{
-		//	new ManageRentalsDialog(this);
-		//}
+		else if(source==btnManageRentals)
+		{
+			new ManageRentalsDialog(this);
+		}
 	}
 	
 	public static void main(String[] args) 

@@ -8,7 +8,7 @@ import java.sql.Date;
 
 public class Rental
 { 
-	private String id;
+	private int id;
 	private Date rentDate;
 	private int rentDuration;
 	private Double total;
@@ -21,7 +21,7 @@ public class Rental
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
 		PreparedStatement ps= connection.prepareStatement("INSERT INTO rental (RentalID, Date, Duration, Total, UserID) VALUES(?, ?, ?, ?, ?)");
 		
-		ps.setString(1, id);
+		ps.setInt(1, id);
 		ps.setDate(2, rentDate);
 		ps.setInt(3, rentDuration);
 		ps.setDouble(4, total);

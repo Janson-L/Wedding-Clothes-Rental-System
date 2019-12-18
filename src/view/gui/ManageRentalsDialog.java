@@ -84,10 +84,10 @@ public class ManageRentalsDialog extends JDialog implements ActionListener
 		{
 			new DeleteRentalDialog(this);
 		}
-		else if(source == btnViewRental)
-		{
-			new RentalView(this);
-		}
+		//else if(source == btnViewRental)
+		//{
+		//	new RentalView(this);
+		//}
 		
 		
 	}

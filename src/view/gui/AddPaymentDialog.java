@@ -34,6 +34,7 @@ import controller.validator.MaximumLengthException;
 import controller.validator.RequiredFieldException;
 import controller.validator.Validator;
 import model.ClothesTableModel;
+import model.Model;
 import view.gui.ClothesView;
 
 public class AddPaymentDialog extends JDialog implements ActionListener 
@@ -41,26 +42,30 @@ public class AddPaymentDialog extends JDialog implements ActionListener
 
 	private static final long serialVersionUID = 1L;
 	
-	private JTextField txtID = new JTextField();
+	private JTextField txtRid = new JTextField();
 	private JCheckBox chkPayment = new JCheckBox();
+	private JTextField txtPaymentDate = new JTextField();
 	private JButton btnSubmit = new JButton("Submit");
 	private JButton btnReset = new JButton("Reset");
 	
-	public AddPaymentDialog(ManageClothesDialog dialog)
+	public AddPaymentDialog(MainFrame mainFrame)
 	{
-		super(dialog, "Payment", true);
+		super(mainFrame, "Payment", true);
 		
-		JPanel pnlCentre = new JPanel(new GridLayout(2,1,10,10));
+		JPanel pnlCentre = new JPanel(new GridLayout(3,1,10,10));
 		JPanel pnlSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
 		pnlCentre.setBorder(BorderFactory.createEmptyBorder(10,10,5,10));
 		pnlSouth.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
-		pnlCentre.add(new JLabel("Please enter the Rental ID to be paid.", JLabel.CENTER));
+		
 		pnlCentre.add(new JLabel("Rental ID: ", JLabel.LEFT));
-		pnlCentre.add(txtID);
-		pnlCentre.add(new JLabel("Paid?", JLabel.RIGHT));
+		pnlCentre.add(txtRid);
+		pnlCentre.add(new JLabel("Paid?", JLabel.LEFT));
 		pnlCentre.add(chkPayment);
+		pnlCentre.add(new JLabel("Payment Date(Format->'Year-Month-Day':", JLabel.LEFT));
+		pnlCentre.add(txtPaymentDate);
+		
 		
 		pnlSouth.add(btnSubmit);
 		pnlSouth.add(btnReset);
@@ -75,7 +80,7 @@ public class AddPaymentDialog extends JDialog implements ActionListener
 		this.getRootPane().setDefaultButton(btnSubmit);
 		this.setResizable(false);
 		this.pack();
-		this.setLocationRelativeTo(dialog);
+		this.setLocationRelativeTo(mainFrame);
 		this.setVisible(true);
 		}
 
@@ -85,61 +90,64 @@ public class AddPaymentDialog extends JDialog implements ActionListener
 		if(source == btnSubmit)
 		{
 			Vector<Exception> exceptions = new Vector<>();
-			int id;
+			int rid;
 			String x=null;
+			String paymentDate=null;
 			Boolean paid=chkPayment.isSelected();
 			
 			try 
 			{
-				x=Validator.validate("Rental ID", txtID.getText(), true, 15);
+				x=Validator.validate("Rental ID", txtRid.getText(), true, 15);
 			} 
 			catch (RequiredFieldException | MaximumLengthException e) 
 			{
 				exceptions.add(e);
 			}
 			
+			try {
+				paymentDate=Validator.validate("Payment Date", txtPaymentDate.getText(), true,50);
+			} 
+			catch (RequiredFieldException | MaximumLengthException e) {
+				exceptions.add(e);
+			
 			int size = exceptions.size();
+			rid = Integer.parseInt(x);
 			if(size == 0)
 			{
-				id = Integer.parseInt(x);
-				try {
-					if(WedClothManager.AddPayment(id)!=0)
+				try 
+				{
+					int id=Model.getID("Payment");
+					
+					if(WedClothManager.addPayment(id,paid,paymentDate,rid)!=0)
 					{
 						JOptionPane.showMessageDialog(this, "Payment Completed" , "Success", JOptionPane.INFORMATION_MESSAGE);
-						reset();
+						
+						txtRid.setText("");
+						chkPayment.setText("false");
+						txtPaymentDate.setText("");
+						txtPaymentDate.grabFocus();
 					}
 					else
 						JOptionPane.showMessageDialog(this, "Unable to process payment","Unsuccessful",JOptionPane.WARNING_MESSAGE);
 				}
-				catch (ClassNotFoundException | SQLException e) {
+				catch (ClassNotFoundException | SQLException ev) 
+				{
 					JOptionPane.showMessageDialog(this, e.getMessage(), "Database Error", JOptionPane.WARNING_MESSAGE);
 				}
 			}
-			else
-			{
-				String message=null;
-				if(size==1)
-					message=exceptions.firstElement().getMessage();
-				else
-				{
-					message="PLease fix the following errors: ";
-						
-					for(int z=0;z<size;z++)
-						message+="\n"+(z+1)+"."+exceptions.get(z).getMessage();
-				}
-					JOptionPane.showMessageDialog(this, message, "Validation Error", JOptionPane.WARNING_MESSAGE);
-			}
-			reset();
-		}
+		
+			
 		else if(source == btnReset)
 		{
 			reset();
-		}	
-	}
+	    }
+			}}}
 	private void reset()
 	{
-		txtID.setText("");
+		txtRid.setText("");
 		chkPayment.setText("false");
+		txtPaymentDate.setText("");
+		txtPaymentDate.grabFocus();
 
 	}
 	

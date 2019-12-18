@@ -14,6 +14,7 @@ public class MainFrame extends JFrame implements ActionListener
 	private JButton btnManageRentals= new JButton("Manage Rentals");
 	private JButton btnManageUser=new JButton("Manage Users");
 	private JButton btnManageWedCloth=new JButton("Manage Wedding Clothes");
+	private JButton btnManagePayment=new JButton("Manage Payment");
 	
 	
 	public MainFrame()
@@ -21,12 +22,14 @@ public class MainFrame extends JFrame implements ActionListener
 		btnManageRentals.addActionListener(this);
 		btnManageUser.addActionListener(this);
 		btnManageWedCloth.addActionListener(this);
+		btnManagePayment.addActionListener(this);
 		
-		GridLayout layout = new GridLayout(3, 1, 10, 10);
+		GridLayout layout = new GridLayout(4, 1, 10, 10);
 		
 		this.add(btnManageRentals);
 		this.add(btnManageUser);
 		this.add(btnManageWedCloth);
+		this.add(btnManagePayment);
 	
 		this.setSize(800,500);
 		this.setResizable(false);
@@ -52,6 +55,10 @@ public class MainFrame extends JFrame implements ActionListener
 		else if(source==btnManageRentals)
 		{
 			new ManageRentalsDialog(this);
+		}
+		else if(source==btnManagePayment)
+		{
+			new AddPaymentDialog(this);
 		}
 	}
 	

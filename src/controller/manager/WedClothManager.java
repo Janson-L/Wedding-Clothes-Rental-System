@@ -328,29 +328,29 @@ public class WedClothManager
 		connection.close();
 	}
 	
-	public static Vector<WedCloth> searchRental() throws ClassNotFoundException, SQLException
+	public static Vector<Rental> searchRental() throws ClassNotFoundException, SQLException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
 		PreparedStatement ps;
 	
-		Vector<WedCloth> rentals=new Vector<>();
+		Vector<Rental> rentals=new Vector<>();
 	
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
 
 
-		ps= connection.prepareStatement("SELECT * FROM Clothes ORDER BY ClothesID;");
+		ps= connection.prepareStatement("SELECT * FROM Rental ORDER BY RentalID;");
 	
 		ResultSet rs=ps.executeQuery();
 	
 			while(rs.next()) {
 				Rental rental=new Rental();
-				rental.setClothesID(rs.getInt("ClothesID"));
-				rental.setRentRate(rs.getDouble("RentRate"));
-				rental.setClothesType(rs.getBoolean("clothesType"));
-				rental.setColour(rs.getString("Colour"));
-				rental.setSize(rs.getString("Size"));
+				rental.setId(rs.getInt("RentalID"));
+				rental.setRentDate(rs.getDate("RentRate"));
+				rental.setRentDuration(rs.getInt("Duration"));
+				rental.setTotal(rs.getDouble("Total"));
+				rental.setUserID(rs.getInt("UserID"));
 			
-				rentals.add(wedCloth);
+				rentals.add(rental);
 			}
 			
 			connection.close();

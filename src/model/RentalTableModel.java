@@ -51,13 +51,13 @@ import javax.swing.table.AbstractTableModel;
 	    {
 	        Rental row = rental.get(rowIndex);
 	        if(0 == columnIndex) {
-	            return row.getRentalID();
+	            return row.getId();
 	        }
 	        else if(1 == columnIndex) {
-	            return row.getDate();
+	            return row.getRentDate();
 	        }
 	        else if(2 == columnIndex) {
-	            return row.getDuration();
+	            return row.getRentDuration();
 	        }
 	        else if(3 == columnIndex) {
 	            return row.getTotal();

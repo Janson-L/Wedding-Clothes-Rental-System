@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2019 at 09:52 AM
+-- Generation Time: Dec 14, 2019 at 07:01 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -29,10 +29,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `clothes` (
-  `ClothesID` varchar(255) NOT NULL,
+  `ClothesID` int(12) NOT NULL,
   `RentRate` double NOT NULL,
-  `ClothesType` varchar(255) NOT NULL,
-  `Colour` varchar(255) NOT NULL
+  `ClothesType` int(1) NOT NULL,
+  `Colour` varchar(255) NOT NULL,
+  `Size` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -42,8 +43,8 @@ CREATE TABLE `clothes` (
 --
 
 CREATE TABLE `clothes_rental` (
-  `ClothesID` varchar(255) NOT NULL,
-  `RentalID` varchar(255) NOT NULL
+  `ClothesID` int(12) NOT NULL,
+  `RentalID` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -53,8 +54,9 @@ CREATE TABLE `clothes_rental` (
 --
 
 CREATE TABLE `payment` (
-  `PaymentID` varchar(255) NOT NULL,
-  `PaymentDate` date NOT NULL
+  `PaymentID` int(12) NOT NULL,
+  `PaymentDate` date NOT NULL,
+  `RentalID` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -64,12 +66,11 @@ CREATE TABLE `payment` (
 --
 
 CREATE TABLE `rental` (
-  `RentalID` varchar(255) NOT NULL,
+  `RentalID` int(12) NOT NULL,
   `Date` date NOT NULL,
   `Duration` int(5) NOT NULL,
   `Total` double NOT NULL,
-  `UserID` varchar(255) NOT NULL,
-  `PaymentID` varchar(255) NOT NULL
+  `UserID` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -79,13 +80,18 @@ CREATE TABLE `rental` (
 --
 
 CREATE TABLE `user` (
-  `UserID` varchar(255) NOT NULL,
+  `UserID` int(12) NOT NULL,
   `Name` varchar(255) NOT NULL,
+  `Password` varchar(255) NOT NULL,
   `PhoneNo` varchar(255) NOT NULL,
   `ICNo` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
-  `Class` int(1) NOT NULL
+  `Class` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
 
 --
 -- Indexes for dumped tables
@@ -102,21 +108,22 @@ ALTER TABLE `clothes`
 --
 ALTER TABLE `clothes_rental`
   ADD PRIMARY KEY (`ClothesID`,`RentalID`),
-  ADD KEY `RentalID` (`RentalID`);
+  ADD KEY `RentalID` (`RentalID`),
+  ADD KEY `ClothesID` (`ClothesID`);
 
 --
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
-  ADD PRIMARY KEY (`PaymentID`);
+  ADD PRIMARY KEY (`PaymentID`),
+  ADD KEY `RentalID` (`RentalID`);
 
 --
 -- Indexes for table `rental`
 --
 ALTER TABLE `rental`
   ADD PRIMARY KEY (`RentalID`),
-  ADD KEY `UserID` (`UserID`),
-  ADD KEY `PaymentID` (`PaymentID`);
+  ADD KEY `UserID` (`UserID`);
 
 --
 -- Indexes for table `user`
@@ -136,11 +143,16 @@ ALTER TABLE `clothes_rental`
   ADD CONSTRAINT `clothes_rental_ibfk_2` FOREIGN KEY (`RentalID`) REFERENCES `rental` (`RentalID`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `payment`
+--
+ALTER TABLE `payment`
+  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`RentalID`) REFERENCES `rental` (`RentalID`);
+
+--
 -- Constraints for table `rental`
 --
 ALTER TABLE `rental`
-  ADD CONSTRAINT `rental_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `rental_ibfk_2` FOREIGN KEY (`PaymentID`) REFERENCES `payment` (`PaymentID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `rental_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

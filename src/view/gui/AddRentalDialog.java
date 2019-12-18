@@ -23,6 +23,7 @@ import controller.validator.MaximumLengthException;
 //import controller.validator.MinimumNumberException;
 import controller.validator.RequiredFieldException;
 import controller.validator.Validator;
+
 import model.Model;
 import model.Rental;
 import controller.manager.WedClothManager;
@@ -48,11 +49,11 @@ public class AddRentalDialog extends JDialog implements ActionListener
 		pnlCenter.setBorder(BorderFactory.createEmptyBorder(10,10,5,10));
 		pnlSouth.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
-		pnlCenter.add(new JLabel("Rent(RM):", JLabel.RIGHT));
+		pnlCenter.add(new JLabel("Date:", JLabel.RIGHT));
 		pnlCenter.add(txtDate);
-		pnlCenter.add(new JLabel("Colour:", JLabel.RIGHT));
+		pnlCenter.add(new JLabel("Duration:", JLabel.RIGHT));
 		pnlCenter.add(txtDuration);
-		pnlCenter.add(new JLabel("Size (S,M,L,XL):", JLabel.RIGHT));
+		pnlCenter.add(new JLabel("Total(RM):", JLabel.RIGHT));
 		pnlCenter.add(txtTotal);
 		
 		
@@ -92,7 +93,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 			}
 			
 			try {
-				size=Validator.validate("Size", txtSize.getText(), true,50);
+				total=Validator.validate("Total", txtSize.getText(), true,50);
 			} 
 			catch (RequiredFieldException | MaximumLengthException e) {
 				exceptions.add(e);

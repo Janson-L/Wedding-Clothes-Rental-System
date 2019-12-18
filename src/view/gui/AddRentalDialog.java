@@ -134,7 +134,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 				{
 					int id = Model.getID("Rental");
 					double x = Double.valueOf(total.trim()).doubleValue();
-					double y = Double.valueOf(duration.trim()).intValue();
+					double y = Double.valueOf(duration.trim()).doubleValue();
 					if(WedClothManager.addRental(id, rentDate, y, x)!=0)
 					{
 				

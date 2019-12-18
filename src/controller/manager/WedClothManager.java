@@ -286,6 +286,8 @@ public class WedClothManager
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
 			PreparedStatement ps = connection.prepareStatement(
 					"INSERT INTO clothes(RentalID,Date,Duration,Total)VALUES(?,?,?,?)");
+			
+			//just another alternative,ignore this
 			//long millis=System.currentTimeMillis();  
 			//long longDate = Long.parseLong(rentDate);
 	        //java.sql.Date date=new java.sql.Date(longDate); 

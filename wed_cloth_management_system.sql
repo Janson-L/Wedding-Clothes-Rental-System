@@ -66,9 +66,9 @@ CREATE TABLE `payment` (
 --
 
 CREATE TABLE `rental` (
-  `RentalID` int(12) NOT NULL,
+  `RentalID` int(12) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `Date` date NOT NULL,
-  `Duration` int(5) NOT NULL,
+  `Duration` double NOT NULL,
   `Total` double NOT NULL,
   `UserID` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -122,7 +122,6 @@ ALTER TABLE `payment`
 -- Indexes for table `rental`
 --
 ALTER TABLE `rental`
-  ADD PRIMARY KEY (`RentalID`),
   ADD KEY `UserID` (`UserID`);
 
 --

@@ -346,7 +346,7 @@ public class WedClothManager
 				Rental rental=new Rental();
 				rental.setId(rs.getInt("RentalID"));
 				rental.setRentDate(rs.getDate("RentRate"));
-				rental.setRentDuration(rs.getInt("Duration"));
+				rental.setRentDuration(rs.getDouble("Duration"));
 				rental.setTotal(rs.getDouble("Total"));
 				rental.setUserID(rs.getInt("UserID"));
 			

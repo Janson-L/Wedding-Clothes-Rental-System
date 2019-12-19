@@ -116,7 +116,8 @@ ALTER TABLE `clothes_rental`
 --
 ALTER TABLE `payment`
   ADD PRIMARY KEY (`PaymentID`),
-  ADD KEY `RentalID` (`RentalID`);
+  ADD KEY `RentalID` (`RentalID`),
+  ADD paid boolean;
 
 --
 -- Indexes for table `rental`

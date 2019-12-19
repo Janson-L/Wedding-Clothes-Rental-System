@@ -10,7 +10,7 @@ public class Rental
 { 
 	private int id;
 	private Date rentDate;
-	private int rentDuration;
+	private double rentDuration;
 	private Double total;
 	private int userID;
 	
@@ -23,11 +23,51 @@ public class Rental
 		
 		ps.setInt(1, id);
 		ps.setDate(2, rentDate);
-		ps.setInt(3, rentDuration);
+		ps.setDouble(3, rentDuration);
 		ps.setDouble(4, total);
 		ps.setInt(5, userID);
 		
 		connection.close();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Date getRentDate() {
+		return rentDate;
+	}
+
+	public void setRentDate(Date rentDate) {
+		this.rentDate = rentDate;
+	}
+
+	public double getRentDuration() {
+		return rentDuration;
+	}
+
+	public void setRentDuration(double rentDuration) {
+		this.rentDuration = rentDuration;
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 	

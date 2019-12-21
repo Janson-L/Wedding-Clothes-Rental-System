@@ -34,6 +34,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 	private static final long serialVersionUID = 1L;
 	
 	private JTextField txtRentDate = new JTextField();
+	private JTextField txtClothesid = new JTextField();
 	private JTextField txtDuration = new JTextField();
 	private JTextField txtTotal = new JTextField();
 	private JTextField txtUid = new JTextField();
@@ -53,6 +54,8 @@ public class AddRentalDialog extends JDialog implements ActionListener
 		
 		pnlCenter.add(new JLabel("Date: (Format->'Year-Month-Day'):", JLabel.RIGHT));
 		pnlCenter.add(txtRentDate);
+		pnlCenter.add(new JLabel("ClothesID:", JLabel.RIGHT));
+		pnlCenter.add(txtClothesid);
 		pnlCenter.add(new JLabel("Duration (Days):", JLabel.RIGHT));
 		pnlCenter.add(txtDuration);
 		pnlCenter.add(new JLabel("Total(RM):", JLabel.RIGHT));
@@ -90,7 +93,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 			String rentDate=null;
 			String duration=null;
 			String total=null;
-			int uid;
+			int clothesID=0, uid=0;
 			String z=null;
 			
 			try {
@@ -139,7 +142,18 @@ public class AddRentalDialog extends JDialog implements ActionListener
 			
 			try 
 			{
-				z=Validator.validate("Clothes ID", txtUid.getText(), true, 15);
+				z=Validator.validate("User ID", txtUid.getText(), true, 15);
+				uid= Integer.parseInt(z);
+			} 
+			catch (RequiredFieldException | MaximumLengthException e) 
+			{
+				exceptions.add(e);
+			}
+			
+			try 
+			{
+				z=Validator.validate("Clothes ID", txtClothesid.getText(), true, 15);
+				clothesID= Integer.parseInt(z);
 			} 
 			catch (RequiredFieldException | MaximumLengthException e) 
 			{
@@ -150,8 +164,8 @@ public class AddRentalDialog extends JDialog implements ActionListener
 			
 			
 			
+			
 			int size1 =exceptions.size();
-			uid= Integer.parseInt(z);
 			if(size1 == 0)
 			{
 				try 
@@ -159,17 +173,13 @@ public class AddRentalDialog extends JDialog implements ActionListener
 					int id = Model.getID("Rental");
 					double x = Double.valueOf(total.trim()).doubleValue();
 					double y = Double.valueOf(duration.trim()).doubleValue();
-					if(WedClothManager.addRental(id, rentDate, y, x,uid)!=0)
+					if(WedClothManager.addRental(id, rentDate, y, x,uid,clothesID)!=0)
 					{
 				
 							JOptionPane.showMessageDialog(this, "Rental has been added" , "Success", JOptionPane.INFORMATION_MESSAGE);
 	
 
-						txtRentDate.setText("");
-						txtDuration.setText("");
-						txtTotal.setText("");
-						txtUid.setText("");
-						txtRentDate.grabFocus();
+						reset();
 					}
 					else
 						JOptionPane.showMessageDialog(this, "Unable to add new rental","Unsuccessful",JOptionPane.WARNING_MESSAGE);
@@ -191,6 +201,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 	private void reset()
 	{
 		txtRentDate.setText("");
+		txtClothesid.setText("");
 		txtDuration.setText("");
 		txtTotal.setText("");
 		txtUid.setText("");

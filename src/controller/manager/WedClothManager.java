@@ -351,7 +351,7 @@ public class WedClothManager
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
 
 
-		ps= connection.prepareStatement("SELECT * FROM Rental ORDER BY RentalID;");
+		ps= connection.prepareStatement("SELECT RentalID,RentRate,Duration,Total,UserID FROM Rental ORDER BY RentalID;");
 	
 		ResultSet rs=ps.executeQuery();
 	

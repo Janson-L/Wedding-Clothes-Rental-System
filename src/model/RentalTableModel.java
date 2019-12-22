@@ -11,10 +11,10 @@ import javax.swing.table.AbstractTableModel;
 		private Vector<Rental> rental;
 	     
 	    private final String[] columnNames = new String[] {
-	            "RentalID", "Date", "Duration", "Total","UserID"
+	            "RentalID","ClothesID" ,"Date", "Duration", "Total","UserID"
 	    };
 	    private final Class[] columnClass = new Class[] {
-	        Integer.class, String.class, Integer.class, Double.class, Integer.class
+	        Integer.class, Integer.class,String.class, Integer.class, Double.class, Integer.class
 	    };
 	 
 	    public RentalTableModel(Vector<Rental> rental) throws ClassNotFoundException, SQLException
@@ -53,16 +53,19 @@ import javax.swing.table.AbstractTableModel;
 	        if(0 == columnIndex) {
 	            return row.getId();
 	        }
-	        else if(1 == columnIndex) {
-	            return row.getRentDate();
+	        else if(1==columnIndex) {
+	        	return row.getClothesID();
 	        }
 	        else if(2 == columnIndex) {
-	            return row.getRentDuration();
+	            return row.getRentDate();
 	        }
 	        else if(3 == columnIndex) {
-	            return row.getTotal();
+	            return row.getRentDuration();
 	        }
 	        else if(4 == columnIndex) {
+	            return row.getTotal();
+	        }
+	        else if(5 == columnIndex) {
 	            return row.getUserID();
 	        }
 	        return null;

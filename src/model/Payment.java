@@ -16,7 +16,7 @@ public class Payment
 		PreparedStatement ps= connection.prepareStatement("INSERT INTO Payment (PaymentID,PaymentDate,RentalID) VALUES(?,?,?);");
 		
 		ps.setInt(1, paymentID);
-		ps.setDate(2, java.sql.Date.valueOf(paymentDate)); //wait for the date input from Yong
+		ps.setDate(2, paymentDate); //wait for the date input from Yong
 		ps.setInt(3, rentalID);
 		
 		return 0;

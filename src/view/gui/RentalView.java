@@ -1,10 +1,7 @@
 package view.gui;
 
 import javax.swing.JFrame;
-
 import java.sql.SQLException;
-
-import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -29,6 +26,7 @@ public class RentalView extends JFrame
         this.setTitle("Rental Table");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);       
         this.pack();
+        this.setAlwaysOnTop(true);
         this.setVisible(true);
     }
      

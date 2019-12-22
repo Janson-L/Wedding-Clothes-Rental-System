@@ -36,7 +36,6 @@ public class MainFrame extends JFrame implements ActionListener
 		this.setLayout(layout);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setAlwaysOnTop(true);
 		this.setVisible(true);
 	}
 

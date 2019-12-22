@@ -1,6 +1,5 @@
 package controller.manager;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -313,18 +312,6 @@ public class WedClothManager
 		connection.close();
 		
 		return status;
-	}
-	
-	public static void deleteRental() throws SQLException, ClassNotFoundException
-	{
-		Class.forName("com.mysql.jdbc.Driver");
-		
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
-		//WHERE havent complete
-		PreparedStatement ps=connection.prepareStatement("DELETE * FROM rental WHERE");
-		ps.executeQuery();
-		
-		connection.close();
 	}
 	
 	public static Vector<Rental> searchRental() throws ClassNotFoundException, SQLException

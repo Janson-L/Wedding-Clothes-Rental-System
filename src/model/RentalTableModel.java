@@ -1,7 +1,6 @@
 package model;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import javax.swing.table.AbstractTableModel;
 
 	public class RentalTableModel extends AbstractTableModel

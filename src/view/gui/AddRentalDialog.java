@@ -58,8 +58,8 @@ public class AddRentalDialog extends JDialog implements ActionListener
 		pnlCenter.add(txtClothesid);
 		pnlCenter.add(new JLabel("Duration (Days):", JLabel.RIGHT));
 		pnlCenter.add(txtDuration);
-		pnlCenter.add(new JLabel("Total(RM):", JLabel.RIGHT));
-		pnlCenter.add(txtTotal);
+		//pnlCenter.add(new JLabel("Total(RM):", JLabel.RIGHT));
+		//pnlCenter.add(txtTotal);
 		pnlCenter.add(new JLabel("UserID: ",JLabel.RIGHT));
 		pnlCenter.add(txtUid);
 		
@@ -125,20 +125,15 @@ public class AddRentalDialog extends JDialog implements ActionListener
 				exceptions.add(e);
 			}
 			
-			try {
-				try {
-					total = txtTotal.getText();
-				double x = Double.valueOf(total.trim()).doubleValue();
-				}
-				catch(NumberFormatException e) {
-					JOptionPane.showMessageDialog(this, "Please enter a valid number in area 'Total' .","Unsuccessful",JOptionPane.WARNING_MESSAGE);
-				}
-				double x = Double.valueOf(total.trim()).doubleValue();
-				x=Validator.validate1("Total", txtTotal.getText(), true,20);
-			} 
-			catch (RequiredFieldException e) {
-				exceptions.add(e);
-			}
+			/*
+			 * try { try { total = txtTotal.getText(); double x =
+			 * Double.valueOf(total.trim()).doubleValue(); } catch(NumberFormatException e)
+			 * { JOptionPane.showMessageDialog(this,
+			 * "Please enter a valid number in area 'Total' .","Unsuccessful",JOptionPane.
+			 * WARNING_MESSAGE); } double x = Double.valueOf(total.trim()).doubleValue();
+			 * x=Validator.validate1("Total", txtTotal.getText(), true,20); } catch
+			 * (RequiredFieldException e) { exceptions.add(e); }
+			 */
 			
 			try 
 			{
@@ -171,9 +166,9 @@ public class AddRentalDialog extends JDialog implements ActionListener
 				try 
 				{
 					int id = Model.getID("Rental");
-					double x = Double.valueOf(total.trim()).doubleValue();
+					//double x = Double.valueOf(total.trim()).doubleValue();
 					double y = Double.valueOf(duration.trim()).doubleValue();
-					if(WedClothManager.addRental(id, rentDate, y, x,uid,clothesID)!=0)
+					if(WedClothManager.addRental(id, rentDate, y,uid,clothesID)!=0)
 					{
 				
 							JOptionPane.showMessageDialog(this, "Rental has been added" , "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -203,7 +198,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 		txtRentDate.setText("");
 		txtClothesid.setText("");
 		txtDuration.setText("");
-		txtTotal.setText("");
+		//txtTotal.setText("");
 		txtUid.setText("");
 		txtRentDate.grabFocus();
 	}

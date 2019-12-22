@@ -269,12 +269,20 @@ public class WedClothManager
 			return clothes;
 	}
 	
-	public static int addRental(int id,String rentDate, double duration, double total, int Uid, int clothesID) throws ClassNotFoundException, SQLException
+	public static int addRental(int id,String rentDate, double duration, int Uid, int clothesID) throws ClassNotFoundException, SQLException
 	{ 
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
-			PreparedStatement ps = connection.prepareStatement(
+			
+			PreparedStatement ps=connection.prepareStatement("SELECT RentRate FROM Clothes WHERE ClothesID=?");
+			ps.setInt(1, clothesID);
+			
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			double total=duration*rs.getDouble("RentRate");
+			
+			PreparedStatement ps2 = connection.prepareStatement(
 					"INSERT INTO rental(RentalID,Date,Duration,Total,UserID)VALUES(?,?,?,?,?)");
 			
 			//just another alternative,ignore this
@@ -285,20 +293,20 @@ public class WedClothManager
 			java.sql.Date date = java.sql.Date.valueOf(rentDate);//converting string into sql date  
 	        System.out.println(date); 
 			
-			ps.setInt(1, id);
-			ps.setDate(2, date);
-			ps.setDouble(3, duration);
-			ps.setDouble(4, total);
-			ps.setInt(5, Uid);
+			ps2.setInt(1, id);
+			ps2.setDate(2, date);
+			ps2.setDouble(3, duration);
+			ps2.setDouble(4, total);
+			ps2.setInt(5, Uid);
 			
-			PreparedStatement ps2 = connection.prepareStatement(
+			PreparedStatement ps3 = connection.prepareStatement(
 					"INSERT INTO clothes_rental(ClothesID,RentalID)VALUES(?,?)");
 			
-			ps2.setInt(1,clothesID);
-			ps2.setInt(2, id);
+			ps3.setInt(1,clothesID);
+			ps3.setInt(2, id);
 			
-			int status = ps.executeUpdate();
-			status=ps2.executeUpdate();
+			int status = ps2.executeUpdate();
+			status=ps3.executeUpdate();
 			connection.close();
 			
 			return status;

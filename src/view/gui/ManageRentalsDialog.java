@@ -14,7 +14,7 @@ public class ManageRentalsDialog extends JDialog implements ActionListener
 	
 	private JButton btnAddRental=new JButton("Add Rental");
 	private JButton btnDeleteRental=new JButton("Delete Rental");
-	private JButton btnViewRental=new JButton("ViewRental");
+	private JButton btnViewRental=new JButton("View Rental");
 	
 	
 	
@@ -84,10 +84,15 @@ public class ManageRentalsDialog extends JDialog implements ActionListener
 		{
 			new DeleteRentalDialog(this);
 		}
-		//else if(source == btnViewRental)
-		//{
-		//	new RentalView(this);
-		//}
+		else if(source == btnViewRental)
+		{
+			try {
+				new RentalView();
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
 	}

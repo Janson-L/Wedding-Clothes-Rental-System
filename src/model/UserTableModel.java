@@ -11,7 +11,7 @@ import javax.swing.table.AbstractTableModel;
 		private Vector<User> users;
 	     
 	    private final String[] columnNames = new String[] {
-	            "ID", "Name", "phoneNo", "IC No","Email","Admin"
+	            "UserID", "Name", "phoneNo", "IC No","Email","Admin"
 	    };
 	    private final Class[] columnClass = new Class[] {
 	        Integer.class, String.class, String.class, String.class, String.class, Boolean.class

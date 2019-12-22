@@ -7,11 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Vector;
-import java.sql.Date; 
+
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,7 +26,7 @@ import controller.validator.RequiredFieldException;
 import controller.validator.Validator;
 
 import model.Model;
-import model.Rental;
+
 import controller.manager.WedClothManager;
 
 public class AddRentalDialog extends JDialog implements ActionListener
@@ -36,7 +36,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 	private JTextField txtRentDate = new JTextField();
 	private JTextField txtClothesid = new JTextField();
 	private JTextField txtDuration = new JTextField();
-	private JTextField txtTotal = new JTextField();
+	//private JTextField txtTotal = new JTextField();
 	private JTextField txtUid = new JTextField();
 	private JButton btnSubmit=new JButton("Submit");
 	private JButton btnReset=new JButton("Reset");
@@ -92,7 +92,7 @@ public class AddRentalDialog extends JDialog implements ActionListener
 			Vector<Exception> exceptions =new Vector<>();
 			String rentDate=null;
 			String duration=null;
-			String total=null;
+			//String total=null;
 			int clothesID=0, uid=0;
 			String z=null;
 			

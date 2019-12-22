@@ -149,19 +149,6 @@ public class WedClothManager
 		
 		return status;
 	}
-
-	
-	public static void deleteWedCloth() throws SQLException, ClassNotFoundException
-	{
-		Class.forName("com.mysql.jdbc.Driver");
-		
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
-		//WHERE havent complete
-		PreparedStatement ps=connection.prepareStatement("DELETE * FROM clothes WHERE");
-		ResultSet rs=ps.executeQuery();
-		
-		connection.close();
-	}
 	
 	public static int addUser(int id, String name, String password, String phoneNo, String ICNo, String email, Boolean type) throws ClassNotFoundException, SQLException
 	{		
@@ -184,7 +171,6 @@ public class WedClothManager
 			connection.close();
 			
 			return status;
-
 	}
 	
 	public static Vector<User> searchUser() throws ClassNotFoundException, SQLException
@@ -345,18 +331,16 @@ public class WedClothManager
 	{
 		Class.forName("com.mysql.jdbc.Driver");
 		PreparedStatement ps,ps2;
-	
+		int clothesID=0;
+		
 		Vector<Rental> rentals=new Vector<>();
 	
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
 
-
-		ps= connection.prepareStatement("SELECT RentalID,RentRate,Duration,Total,UserID FROM Rental ORDER BY RentalID;");
-	
+		ps= connection.prepareStatement("SELECT RentalID,Date, Duration,Total,UserID FROM Rental ORDER BY RentalID;");	
 		ResultSet rs=ps.executeQuery();
 	
 			while(rs.next()) {
-				int clothesID=0;
 				ps2= connection.prepareStatement("SELECT ClothesID FROM Clothes_Rental WHERE RentalID=? ;");
 				ps2.setInt(1,rs.getInt("RentalID"));
 				ResultSet rs2=ps2.executeQuery();
@@ -365,13 +349,12 @@ public class WedClothManager
 					clothesID=rs2.getInt("ClothesID");
 				}
 				
-				Rental rental=new Rental(rs.getInt("RentalID"),rs.getDate("RentRate"),rs.getDouble("Duration"),
+				Rental rental=new Rental(rs.getInt("RentalID"),rs.getDate("Date"),rs.getInt("Duration"),
 						rs.getDouble("Total"),rs.getInt("UserID"),clothesID);
 				rentals.add(rental);
 			}
 			
 			connection.close();
-	
 			return rentals;
 	}
 	

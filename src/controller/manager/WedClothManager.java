@@ -292,7 +292,7 @@ public class WedClothManager
 			ps.setInt(5, Uid);
 			
 			PreparedStatement ps2 = connection.prepareStatement(
-					"INSERT INTO clothes-rental(ClothesID,RentalID)VALUES(?,?)");
+					"INSERT INTO clothes_rental(ClothesID,RentalID)VALUES(?,?)");
 			
 			ps2.setInt(1,clothesID);
 			ps2.setInt(2, id);
@@ -328,7 +328,7 @@ public class WedClothManager
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
 		//WHERE havent complete
 		PreparedStatement ps=connection.prepareStatement("DELETE * FROM rental WHERE");
-		ResultSet rs=ps.executeQuery();
+		ps.executeQuery();
 		
 		connection.close();
 	}
@@ -336,7 +336,7 @@ public class WedClothManager
 	public static Vector<Rental> searchRental() throws ClassNotFoundException, SQLException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
-		PreparedStatement ps;
+		PreparedStatement ps,ps2;
 	
 		Vector<Rental> rentals=new Vector<>();
 	
@@ -348,13 +348,17 @@ public class WedClothManager
 		ResultSet rs=ps.executeQuery();
 	
 			while(rs.next()) {
-				Rental rental=new Rental();
-				rental.setId(rs.getInt("RentalID"));
-				rental.setRentDate(rs.getDate("RentRate"));
-				rental.setRentDuration(rs.getDouble("Duration"));
-				rental.setTotal(rs.getDouble("Total"));
-				rental.setUserID(rs.getInt("UserID"));
-			
+				int clothesID=0;
+				ps2= connection.prepareStatement("SELECT ClothesID FROM Clothes_Rental WHERE RentalID=? ;");
+				ps2.setInt(1,rs.getInt("RentalID"));
+				ResultSet rs2=ps2.executeQuery();
+				
+				while(rs2.next()) {
+					clothesID=rs2.getInt("ClothesID");
+				}
+				
+				Rental rental=new Rental(rs.getInt("RentalID"),rs.getDate("RentRate"),rs.getDouble("Duration"),
+						rs.getDouble("Total"),rs.getInt("UserID"),clothesID);
 				rentals.add(rental);
 			}
 			

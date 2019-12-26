@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 	{
 		private static final long serialVersionUID = 1L;
 
-		private Vector<Rental> rental;
+		private Vector<Payment> payment;
 	     
 	    private final String[] columnNames = new String[] {
 	            "PaymentID", "PaymentDate", "RentalID"
@@ -19,7 +19,7 @@ import javax.swing.table.AbstractTableModel;
 	 
 	    public PaymentTableModel(Vector<Payment> payment) throws ClassNotFoundException, SQLException
 	    {
-	    	this.rental=payment;
+	    	this.payment=payment;
 	    }
 	     
 	    @Override
@@ -43,21 +43,21 @@ import javax.swing.table.AbstractTableModel;
 	    @Override
 	    public int getRowCount()
 	    {
-	        return rental.size();
+	        return payment.size();
 	    }
 	 
 	    @Override
 	    public Object getValueAt(int rowIndex, int columnIndex)
 	    {
-	        Rental row = rental.get(rowIndex);
+	        Payment row = payment.get(rowIndex);
 	        if(0 == columnIndex) {
 	            return row.getPaymentID();
 	        }
 	        else if(1 == columnIndex) {
-	            return row.getDate();
+	            return row.getPaymentDate();
 	        }
 	        else if(2 == columnIndex) {
-	            return row.getUserID();
+	            return row.getRentalID();
 	        }
 	        return null;
 	    }

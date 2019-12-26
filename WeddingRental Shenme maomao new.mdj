@@ -1802,20 +1802,35 @@
 											"top": 458,
 											"width": 208.55712890625,
 											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAFvQpGjSxAKh4s=",
+											"_parent": {
+												"$ref": "AAAAAAFu1GPSzOXw0lA="
+											},
+											"model": {
+												"$ref": "AAAAAAFvQpGjORAHL48="
+											},
+											"font": "Arial;13;0",
+											"left": 365,
+											"top": 473,
+											"width": 208.55712890625,
+											"height": 13
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 360,
 									"top": 423,
 									"width": 218.55712890625,
-									"height": 53
+									"height": 68
 								}
 							],
 							"font": "Arial;13;0",
 							"left": 360,
 							"top": 400,
 							"width": 218.55712890625,
-							"height": 76,
+							"height": 91,
 							"nameLabel": {
 								"$ref": "AAAAAAFu1GPSzOXvREI="
 							},
@@ -2582,6 +2597,16 @@
 							"name": "RentalID",
 							"type": "INTEGER",
 							"length": "12"
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAFvQpGjORAHL48=",
+							"_parent": {
+								"$ref": "AAAAAAFu1GPSzOXsrHE="
+							},
+							"name": "Paid",
+							"type": "BOOLEAN",
+							"length": 0
 						}
 					]
 				},

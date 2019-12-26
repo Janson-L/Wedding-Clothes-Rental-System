@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.Vector;
 
+import model.Payment;
 import model.Rental;
 import model.User;
 import model.WedCloth;
@@ -368,6 +369,35 @@ public class WedClothManager
 			
 			return payment;
 		}
+	
+	public static Vector<Payment> searchPayment() throws ClassNotFoundException, SQLException
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		PreparedStatement ps;
+	
+		Vector<Payment> payments=new Vector<>();
+	
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wed_cloth_management_system","root","");
+
+
+		ps= connection.prepareStatement("SELECT * FROM Payment ORDER BY ClothesID;");
+	
+		ResultSet rs=ps.executeQuery();
+	
+			while(rs.next()) {
+				Payment payment=new Payment();
+				payment.setPaymentID(rs.getInt("PaymentID"));
+				payment.setPaymentDate(rs.getDate("PaymentDate"));
+				payment.setRentalID(rs.getInt("RentalID"));
+				payment.setPaid(rs.getBoolean("Paid"));
+	
+				payments.add(payment);
+			}
+			
+			connection.close();
+	
+			return payments;
+	}
 }
 
 	

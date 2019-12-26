@@ -12,13 +12,13 @@ import javax.swing.SwingUtilities;
 import controller.manager.WedClothManager;
 import model.PaymentTableModel;
 
-public class PaymentView extends JFrame
+public class PaymentTableView extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	
-	public PaymentView() throws ClassNotFoundException, SQLException
+	public PaymentTableView() throws ClassNotFoundException, SQLException
     {
-        PaymentTableModel model = new PaymentTableModel(WedClothManager.searchUser());//rental thing havent create
+        PaymentTableModel model = new PaymentTableModel(WedClothManager.searchPayment());//rental thing havent create
         //create the table
         JTable table = new JTable(model);
         table.setAutoCreateRowSorter(true);

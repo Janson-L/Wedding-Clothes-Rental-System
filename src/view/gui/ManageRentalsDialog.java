@@ -15,34 +15,6 @@ public class ManageRentalsDialog extends JDialog implements ActionListener
 	private JButton btnAddRental=new JButton("Add Rental");
 	private JButton btnDeleteRental=new JButton("Delete Rental");
 	private JButton btnViewRental=new JButton("View Rental");
-	
-	
-	
-	public ManageRentalsDialog(MainFrame frame)
-	{
-		super(frame, "Manage Rentals", true);
-		
-		GridLayout layout = new GridLayout(3,1,10,10);
-		
-		this.add(btnAddRental);
-		this.add(btnDeleteRental);
-		this.add(btnViewRental);
-		
-		
-		btnAddRental.addActionListener(this);
-		btnDeleteRental.addActionListener(this);
-		btnViewRental.addActionListener(this);
-		
-		
-		this.setLayout(layout);
-		this.pack();
-		this.setSize(800,500);
-		this.setLocationRelativeTo(frame);
-		this.setVisible(true);
-	}
-	
-
-	
 
 	public ManageRentalsDialog(MainFrameUser frame) 
 	{

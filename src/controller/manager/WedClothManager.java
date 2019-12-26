@@ -398,6 +398,22 @@ public class WedClothManager
 	
 			return payments;
 	}
+
+	public static int deleteUser(int id) throws ClassNotFoundException, SQLException {
+			Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/wed_cloth_management_system","root","");
+		PreparedStatement ps = connection.prepareStatement(
+				"DELETE FROM User WHERE UserID = ?");
+		
+		ps.setInt(1, id);
+		
+		int status = ps.executeUpdate();
+		
+		connection.close();
+		
+		return status;
+	}
 }
 
 	

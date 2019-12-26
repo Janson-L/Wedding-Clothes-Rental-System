@@ -1,10 +1,9 @@
 package view.gui;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-
 import java.sql.SQLException;
 
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;

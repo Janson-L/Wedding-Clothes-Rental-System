@@ -20,7 +20,7 @@ public class ManageClothesDialog extends JDialog implements ActionListener
 	
 	public ManageClothesDialog(MainFrame frame)
 	{
-		super(frame, "Manage Rentals", true);
+		super(frame, "Manage Clothes", true);
 		
 		GridLayout layout = new GridLayout(4,1,10,10);
 		

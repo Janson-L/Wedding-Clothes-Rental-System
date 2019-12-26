@@ -1,7 +1,8 @@
 package view.gui;
 
-import javax.swing.JFrame;
 import java.sql.SQLException;
+
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -13,8 +14,9 @@ public class RentalView extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	
-	public RentalView() throws ClassNotFoundException, SQLException
+	public RentalView(ManageRentalsDialog dialog) throws ClassNotFoundException, SQLException
     {
+		super("View Rentals");
         RentalTableModel model = new RentalTableModel(WedClothManager.searchRental());
         //create the table
         JTable table = new JTable(model);
@@ -36,7 +38,7 @@ public class RentalView extends JFrame
             @Override
             public void run() {
                 try {
-					new RentalView();
+					new RentalView(null);
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

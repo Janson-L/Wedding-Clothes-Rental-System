@@ -87,7 +87,7 @@ public class ManageRentalsDialog extends JDialog implements ActionListener
 		else if(source == btnViewRental)
 		{
 			try {
-				new RentalView();
+				new RentalView(null);
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

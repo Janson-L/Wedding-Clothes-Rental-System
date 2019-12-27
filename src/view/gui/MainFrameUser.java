@@ -42,9 +42,9 @@ public class MainFrameUser extends JFrame implements ActionListener
 		if(source==btnManageRentals) {
 			new ManageRentalsDialog(this);
 		}
-		/*else if(source==btnManageWedCloth) {
-			new ManageWedCloth(this);
-		}*/
+		else if(source==btnManageWedCloth) {
+			new ManageClothesDialog(this);
+		}
 	}
 	
 	public static void main(String[] args) 
